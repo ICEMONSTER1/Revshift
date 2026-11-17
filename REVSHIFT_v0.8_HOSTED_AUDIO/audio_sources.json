@@ -1,0 +1,57 @@
+[
+  {
+    "id": "s2000",
+    "brand": "Honda",
+    "model": "S2000 (2002) F20C",
+    "filename": "2002-Honda-F20C.ogg",
+    "author": "Tyler Riddle",
+    "license": "CC BY 3.0",
+    "direct_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/2002-Honda-F20C.ogg",
+    "local_filename": "s2000.ogg",
+    "source_page": "https://commons.wikimedia.org/wiki/File:2002-Honda-F20C.ogg"
+  },
+  {
+    "id": "auris",
+    "brand": "Toyota",
+    "model": "Auris Andros Trophy (2010)",
+    "filename": "Toyota Auris Andros Trophy (2010).ogg",
+    "author": "Edvvc",
+    "license": "CC BY-SA 3.0",
+    "direct_url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Toyota_Auris_Andros_Trophy_%282010%29.ogg",
+    "local_filename": "auris.ogg",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Toyota_Auris_Andros_Trophy_(2010).ogg"
+  },
+  {
+    "id": "cayman",
+    "brand": "Porsche",
+    "model": "Cayman S (2006)",
+    "filename": "2006 Porsche Cayman S engine sound.wav",
+    "author": "John64",
+    "license": "CC BY-SA 3.0",
+    "direct_url": "https://upload.wikimedia.org/wikipedia/commons/6/68/2006_Porsche_Cayman_S_engine_sound.wav",
+    "local_filename": "cayman.wav",
+    "source_page": "https://commons.wikimedia.org/wiki/File:2006_Porsche_Cayman_S_engine_sound.wav"
+  },
+  {
+    "id": "gt3rs",
+    "brand": "Porsche",
+    "model": "911 GT3 RS (997, 2009)",
+    "filename": "Porsche 997 GT3 RS.ogg",
+    "author": "Edvvc",
+    "license": "CC BY-SA 3.0",
+    "direct_url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Porsche_997_GT3_RS.ogg",
+    "local_filename": "gt3rs.ogg",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Porsche_997_GT3_RS.ogg"
+  },
+  {
+    "id": "boxster",
+    "brand": "Porsche",
+    "model": "Boxster S 987 (3.4L)",
+    "filename": "Boxster 987 S 3.4l in-car acceleration wet conditions.ogg",
+    "author": "Edvvc",
+    "license": "CC BY-SA 3.0",
+    "direct_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Boxster_987_S_3.4l_in-car_acceleration_wet_conditions.ogg",
+    "local_filename": "boxster.ogg",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Boxster_987_S_3.4l_in-car_acceleration_wet_conditions.ogg"
+  }
+]

@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#080d15" />
+<meta name="description" content="Free real engine field recordings and GPS-based audio response for EVs." />
+<title>REV//SHIFT — Interactive Engine Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#080d15;--panel:#111925;--panel2:#141e2b;--stroke:#263244;--muted:#8896aa;--txt:#eaf0f9;--lime:#b6fc60;--teal:#27d8be;--orange:#ffbc71;--shadow:0 10px 34px rgba(0,0,0,.17)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--txt);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:radial-gradient(ellipse 40% 30% at 75% 0%,#182c28 0%,transparent 100%),var(--bg);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}.hidden{display:none!important}.shell{width:min(1510px,calc(100% - 64px));margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:27px 0 22px;border-bottom:1px solid #243244}.brand{text-decoration:none;color:#fff;display:flex;align-items:center;gap:12px;font-size:20px;font-style:italic;font-weight:950;letter-spacing:-1.2px;line-height:1}.brand-icon{height:45px;width:45px;display:grid;place-items:center;color:#0a1013;background:var(--lime);font-size:26px;transform:skew(-8deg);border-radius:4px}.brand-icon span{position:absolute;right:2px;bottom:3px;font-size:13px}.slash{color:var(--lime)}.brand small{display:block;font-size:8px;letter-spacing:3px;font-style:normal;color:#8b9aaa;margin-top:5px}.head-right{display:flex;align-items:center;gap:9px;color:#a8b8c9;font-size:10px;letter-spacing:1.3px;font-weight:750}.status-led{width:7px;height:7px;background:#617184;border-radius:100%;box-shadow:0 0 0 4px #ffffff09}.status-led.on{background:var(--lime);box-shadow:0 0 0 4px #b6fc6018}.vtag{border:1px solid #384656;border-radius:5px;padding:7px 9px;margin-left:11px;color:#9aabbd}.hero{padding:44px 0 37px;position:relative}.hero:after{content:"";display:block;position:absolute;right:4%;top:18%;width:31%;height:140px;background:repeating-linear-gradient(90deg,transparent 0 15px,#b6fc600e 16px 17px,transparent 18px 30px);mask-image:linear-gradient(to right,transparent,black,transparent);pointer-events:none}.eyebrow{font-weight:800;letter-spacing:2.6px;font-size:10px;color:var(--lime);display:flex;align-items:center;gap:9px}.eyebrow i{width:30px;height:2px;background:var(--lime)}h1{font-size:clamp(38px,4.6vw,67px);letter-spacing:-3px;font-style:italic;font-weight:950;margin:14px 0 4px;line-height:1.05}h1 em{color:var(--lime);font-style:italic}.hero p{max-width:740px;margin:15px 0 0;color:#abb8c9;line-height:1.85;font-size:14px}.main-grid{display:grid;grid-template-columns:minmax(450px,1.08fr) minmax(390px,.92fr);gap:18px;align-items:start}.left-stack{display:grid;gap:18px}.panel{background:linear-gradient(155deg,#15202e 0%,#101824 55%,#0f1722 100%);border:1px solid #293446;border-radius:14px;box-shadow:var(--shadow);padding:23px}.panel-head{display:flex;align-items:start;justify-content:space-between;gap:10px;margin-bottom:23px}.section-kicker{display:block;font-size:10px;letter-spacing:2px;color:var(--lime);font-weight:800;margin-bottom:5px}.panel h2{font-size:20px;letter-spacing:-.4px;font-weight:900;margin:0;font-style:italic}.pill{border:1px solid #3a4a55;color:#b8c5d4;padding:6px 10px;border-radius:5px;font-size:9px;font-weight:850;white-space:nowrap;letter-spacing:1px}.mode-tabs{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:5px;background:#08101a;border:1px solid #263547;border-radius:8px;padding:4px}.mode{border:0;background:transparent;color:#8292a5;border-radius:5px;min-height:38px;font-size:10px;font-weight:900;letter-spacing:.55px}.mode.active{background:#26382f;color:var(--lime);box-shadow:inset 0 0 0 1px #58783e}.gauge-wrap{height:250px;position:relative;margin:7px 0 -20px}.gauge-wrap canvas{width:100%;height:100%;display:block}.gauge-center{position:absolute;top:45%;left:50%;transform:translate(-50%,-15%);text-align:center;pointer-events:none}.speed-number{font-weight:850;font-size:77px;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-4px}.speed-unit{color:var(--muted);letter-spacing:2px;font-size:11px;font-weight:900}.telemetry-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.telemetry{border:1px solid #2a3849;background:#0e1620;border-radius:8px;padding:14px 13px 12px;min-width:0}.telemetry small{font-size:9px;letter-spacing:1px;color:#9aaabe;font-weight:800}.telemetry strong{display:block;font-size:28px;letter-spacing:-1px;margin:5px 0 10px;font-weight:800;font-variant-numeric:tabular-nums}.muted-unit{font-size:11px;color:var(--muted);letter-spacing:0}.minibar{height:3px;background:#334150;border-radius:9px;overflow:hidden}.minibar span{display:block;height:100%;width:0;background:var(--lime);border-radius:9px;transition:width .18s}.control-group{margin-top:20px}.split{display:flex;align-items:center;justify-content:space-between;gap:15px}.split label,.setting-row label{font-size:11px;font-weight:850;letter-spacing:.8px}.value-badge{color:var(--lime);font-size:12px;font-weight:800}.value-badge b{font-size:18px}input[type=range]{display:block;accent-color:var(--lime);width:100%;height:7px;margin:19px 0 10px;cursor:pointer}.slider-ends{display:flex;justify-content:space-between;color:#748599;font-size:10px}.statusline{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #293549;padding-top:17px;margin-top:22px;font-size:10px;color:#9eadbe;line-height:1.5}.outline-btn,.primary-btn{border-radius:7px;border:1px solid #465a6c;background:#172230;color:#d5e1ed;min-height:50px;padding:12px 16px;font-weight:900;letter-spacing:.7px;font-size:11px;transition:transform .12s,filter .12s}.outline-btn:hover,.primary-btn:hover{filter:brightness(1.12)}.outline-btn:active,.primary-btn:active{transform:scale(.98)}.primary-btn{background:var(--lime);color:#101a15;border-color:var(--lime)}.primary-btn.playing{background:#ffbf74;border-color:#ffbf74}.material-dot{display:inline-block;border:2px solid var(--lime);border-radius:50%;width:12px;height:12px;margin-right:9px}.minor{color:#90a0b2;font-size:10.5px;line-height:1.8;margin:11px 0 0}.pair-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.pair-head strong{font-size:12px}.pair-status{color:var(--orange);font-size:10px;font-weight:850;letter-spacing:1px}.pair-status.good{color:var(--lime)}.pair-body{display:flex;align-items:center;gap:18px;margin-top:14px}.qrbox{min-height:144px;width:144px;flex:none;background:#fff;border-radius:8px;display:grid;place-items:center;position:relative;padding:8px}.qrbox img{display:block;width:100%;height:auto;image-rendering:pixelated}.qrbox img:not([src]){display:none}.qrbox #qrPlaceholder{color:#263847;font-size:20px;letter-spacing:4px;font-weight:900}.qrbox:has(img[src]) #qrPlaceholder{display:none}.pair-desc small{color:#9badbe;font-size:9px;font-weight:800;letter-spacing:1.5px}.pair-code{display:block;font-size:27px;letter-spacing:3px;color:var(--lime);margin:6px 0}.pair-desc p{color:#a7b5c3;font-size:11px;line-height:1.6;margin:7px 0}.small-btn{background:transparent;border:1px solid #536476;color:#d5dfeb;border-radius:5px;padding:7px 9px;font-size:10px;font-weight:800}.live-dot{font-size:9px;color:var(--lime);letter-spacing:1px;border:1px solid #486449;background:#b6fc600c;padding:6px 8px;border-radius:5px;white-space:nowrap}.selected-engine{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:17px;background:#0d1620;border:1px solid #314252;border-radius:8px}.selected-engine-name small{display:block;letter-spacing:1px;color:#8ca0b4;font-size:9px;font-weight:800}.selected-engine-name strong{display:block;margin-top:7px;font-size:18px;font-weight:900;line-height:1.3}.selected-engine-name>span{display:block;color:var(--lime);font-size:11px;margin-top:5px}.engine-stamp{display:grid;place-items:center;width:68px;height:68px;flex:none;border:2px solid #586e43;background:#1e3022;clip-path:polygon(18% 0,82% 0,100% 18%,100% 82%,82% 100%,18% 100%,0 82%,0 18%);font-weight:950;font-size:27px;font-style:italic;color:var(--lime)}.audio-controls{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin:16px 0}.audio-controls .primary-btn{display:flex;align-items:center;justify-content:center;gap:10px}.audio-controls #audioIcon{font-size:17px}.rev-btn:active{background:#374937;color:var(--lime)}.sound-settings{display:grid;grid-template-columns:1fr 1fr;gap:19px}.setting-row{min-width:0}.setting-row label{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#b6c2ce}.setting-row label span{color:var(--lime)}.setting-row input{margin:16px 0 0}.setting-row select{background:#0b141f;border:1px solid #354455;border-radius:6px;color:#dde8f3;margin-top:10px;width:100%;padding:10px 12px;outline:none;font-size:12px;font-weight:800}.caution{border-left:2px solid #566f4b;padding-left:10px}.library-panel{min-height:760px}.library-lead{color:#a0afbf;line-height:1.75;font-size:12px;margin-bottom:16px}.filters{display:flex;gap:7px;margin-bottom:14px}.filter{border:1px solid #3a4757;background:#111b28;color:#aebcc9;font-size:10px;letter-spacing:1px;font-weight:900;border-radius:6px;padding:11px 14px}.filter.active{background:#263c27;border-color:#6f914a;color:var(--lime)}.searchbar{border:1px solid #344455;border-radius:6px;background:#0b131e;display:flex;align-items:center;gap:9px;padding:0 12px;color:#a4b4c6}.searchbar span{font-size:23px}.searchbar input{background:none;border:0;outline:0;min-width:0;width:100%;padding:12px 0;color:#ebf2fb;font-size:12px}.searchbar input::placeholder{color:#718195}.brand-filters{display:flex;gap:6px;flex-wrap:wrap;margin:15px 0}.brand-chip{background:#192534;border:1px solid #2c3d4b;border-radius:5px;padding:8px 9px;font-size:9px;letter-spacing:.7px;color:#9dafc1;font-weight:800}.brand-chip.active{background:var(--lime);color:#0f1b12;border-color:var(--lime)}.engine-list{display:flex;flex-direction:column;gap:8px;max-height:845px;overflow:auto;padding:0 5px 3px 0;scrollbar-color:#405365 #0f1924;scrollbar-width:thin}.engine-card{width:100%;text-align:left;display:flex;align-items:center;gap:14px;padding:13px;border:1px solid #2d3e4f;background:#0f1925;border-radius:9px;color:var(--txt);position:relative;transition:background .12s,border-color .12s}.engine-card:hover{border-color:#719054;background:#192a2a}.engine-card.selected{border-color:var(--lime);box-shadow:inset 0 0 0 1px #b6fc6045;background:linear-gradient(90deg,#243429 0%,#13221e 100%)}.engine-card .engine-graphic{width:58px;height:58px;flex:none;background:radial-gradient(circle at center,#36504a,#15222c);border-radius:7px;display:grid;place-items:center;position:relative;overflow:hidden;font-size:17px;font-weight:950;font-style:italic;color:#d6f9ac}.engine-card .engine-graphic:before{content:"";position:absolute;inset:8px;border:2px dashed #708a7380;border-radius:100%;transform:rotate(35deg)}.engine-card .engine-graphic b{position:relative;z-index:1}.engine-info{flex:1;min-width:0}.engine-info small{display:block;font-size:9px;font-weight:900;letter-spacing:1.5px;color:var(--lime)}.engine-info strong{display:block;font-size:14px;line-height:1.3;margin:4px 0}.engine-info span{font-size:10px;color:#93a4b6;line-height:1.3;display:block}.engine-check{font-weight:950;border-radius:50%;border:1px solid #52637a;color:#8c9aad;width:24px;height:24px;display:grid;place-items:center;flex:none}.selected .engine-check{background:var(--lime);color:#1b251b;border-color:var(--lime)}.empty-state{color:var(--muted);border:1px dashed #4a5566;padding:30px 15px;text-align:center;border-radius:7px}.info-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 34px}.info-strip>div{border-left:2px solid #759d4a;padding-left:14px}.info-strip strong{display:block;font-size:12px;letter-spacing:1.5px;margin-bottom:7px}.info-strip span{font-size:11px;color:#899aac;line-height:1.6;display:block}footer{display:flex;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid #273142;padding:21px 0 40px;color:#8190a3;font-size:10px;letter-spacing:.3px}footer span:first-child{letter-spacing:1px;font-weight:850}::selection{background:var(--lime);color:#09150b}
+@media (max-width:1050px){.shell{width:calc(100% - 32px)}.main-grid{grid-template-columns:1fr}.library-panel{min-height:auto}.engine-list{max-height:570px}.hero{padding:29px 0}.hero:after{display:none}}@media (max-width:580px){.shell{width:calc(100% - 20px)}.topbar{padding:16px 0}.brand{font-size:17px}.brand-icon{width:38px;height:38px}.head-right{font-size:0}.vtag{font-size:9px;margin-left:0}.hero h1{font-size:40px;letter-spacing:-2px}.hero p{font-size:12px}.eyebrow{font-size:8px;letter-spacing:1.5px}.panel{padding:15px}.panel h2{font-size:17px}.mode-tabs{grid-template-columns:1fr 1fr 1.2fr}.mode{font-size:9px;letter-spacing:0}.gauge-wrap{height:206px}.speed-number{font-size:63px}.telemetry{padding:12px 8px}.telemetry strong{font-size:23px}.telemetry small{font-size:8px;letter-spacing:.1px}.audio-controls{grid-template-columns:1fr 1fr}.audio-controls button{font-size:9px;padding:10px 8px}.engine-list{max-height:610px}.pair-body{gap:9px}.qrbox{width:118px;min-height:118px}.pair-code{font-size:21px}.pair-desc p{font-size:10px}.info-strip{grid-template-columns:1fr;gap:18px}footer{display:block;line-height:1.8}footer span{display:block;margin-bottom:7px}}
+
+/* v0.2: build, drive-sound, and user-supplied recordings */
+.setting-stack{margin-top:19px}.setting-stack .split{margin-bottom:10px}.mode-label{font-weight:900;letter-spacing:1.2px;font-size:10px;color:#cbd8e6}.mode-help{font-size:10px;color:#8c9fb0;text-align:right}.sound-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.sound-tabs.three{grid-template-columns:repeat(3,minmax(0,1fr))}.sound-tab{padding:12px 7px;border:1px solid #35495b;border-radius:7px;background:#101b28;color:#afc0d0;font-size:11px;font-weight:900;letter-spacing:.65px;min-height:54px;transition:background .15s,border-color .15s}.sound-tab small{display:block;margin-top:5px;font-size:10px;font-weight:500;letter-spacing:0;color:#8498aa}.sound-tab.active{border-color:var(--lime);background:#263a29;color:#e7ffc9}.sound-tab.active small{color:#c2d3b6}.recording-panel{border-top:1px solid #263747;padding-top:18px}.sample-details{margin-top:12px;border:1px solid #344758;border-radius:7px;padding:11px 12px;font-size:11px;color:#bdcbd7}.sample-details summary{cursor:pointer;font-weight:750}.sample-details p{color:#8e9fab;line-height:1.65;margin:12px 0}.sample-inputs{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px}.sample-inputs label{display:flex;flex-direction:column;gap:5px;font-size:10px;color:#b6c8d8}.sample-inputs input{font-size:10px;max-width:100%;color:#dce9f4}.sample-inputs input::file-selector-button{background:#253c2c;color:#d4f6b6;border:1px solid #5c8351;border-radius:4px;margin-right:8px;padding:7px;cursor:pointer}.setting-row select{appearance:auto}
+@media(max-width:580px){.sound-tab{min-height:57px;font-size:10px}.mode-help{max-width:55%}.sound-tab small{font-size:9px}.setting-stack{margin-top:16px}}
+
+/* v0.4 offline-first source controls */
+.audio-recovery{margin-top:10px;padding:14px;border:1px solid #54704b;border-radius:9px;background:#172522;display:grid;gap:9px}
+.audio-recovery strong{font-size:12px;letter-spacing:.4px;color:#e7ffc9}
+.audio-recovery p{font-size:11px;color:#afc5b4;line-height:1.7;margin:0}
+.audio-recovery .link-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.audio-recovery .link-row a{display:inline-flex;border:1px solid #527153;padding:9px 11px;border-radius:6px;color:#d5f4c5;font-size:11px;text-decoration:none}
+.audio-recovery input[type=file]{font-size:11px;color:#d7e0e8;max-width:100%;width:100%}
+.audio-recovery input[type=file]::file-selector-button{background:#c9ff72;color:#18210c;border:0;padding:10px;border-radius:5px;margin-right:8px;font-weight:800;cursor:pointer}
+#downloadStatus{font-size:11px;color:#b5c7c4}
+
+
+/* v0.7 — Tablet-first cockpit: performance instrument cluster for browser display */
+html{scroll-behavior:smooth}
+.shell{width:min(1640px,calc(100% - 42px))}
+body{background:radial-gradient(ellipse 90% 30% at 50% 0%,#122c2b 0%,transparent 65%),#060a0f}
+.hero{padding:17px 0 14px}
+.hero h1{font-size:clamp(18px,2.2vw,34px);margin:6px 0 0;letter-spacing:-1px}
+.hero .eyebrow,.hero p,.hero:after{display:none!important}
+.topbar{padding:14px 0 12px}
+#settingsPanel{display:none}
+#settingsHead[hidden]{display:none}
+.settings-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 11px;color:#b9cada;font-size:12px;letter-spacing:.7px}
+.settings-head span{font-size:11px;color:#8195a8}
+body.settings-open #settingsPanel{display:grid}
+.cockpit{background:radial-gradient(ellipse 45% 45% at 50% 48%,#15302855,transparent 85%),linear-gradient(160deg,#121d29 0%,#090f18 55%,#111e24 100%);border:1px solid #375251;box-shadow:0 18px 70px #0008,inset 0 0 60px #102f2d45;border-radius:22px;overflow:hidden;position:relative;padding:18px 26px 14px}
+.cockpit:before{content:"";height:3px;position:absolute;top:0;left:11%;right:11%;background:linear-gradient(90deg,transparent,#b6fc60,transparent);opacity:.8}
+.cockpit-top{display:flex;align-items:center;gap:14px;justify-content:space-between}
+.cockpit-brand{white-space:nowrap;font-style:italic;color:#f2fcff;font-size:17px;font-weight:1000;letter-spacing:-.5px;display:flex;align-items:center;gap:9px}
+.cockpit-brand b{color:#a5b5be;font-size:10px;font-style:normal;letter-spacing:2px;margin-left:7px}
+.beacon{display:inline-block;width:9px;height:9px;background:#b6fc60;border-radius:50%;box-shadow:0 0 0 6px #c6ff7414,0 0 16px #b6fc6090}
+.cockpit-state{display:flex;align-items:center;gap:9px;color:#9cbbc3;font-size:11px;font-weight:800;letter-spacing:.8px}
+.dot-sep{color:#50636b}
+.cockpit-actions{display:flex;align-items:center;gap:7px}
+.cockpit-actions button{color:#bcd5db;border:1px solid #345050;border-radius:8px;background:#192a2d;padding:10px 11px;font-size:10px;font-weight:900;letter-spacing:.7px}
+.cockpit-actions button:hover{background:#284841}
+.cockpit-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,0.46fr) minmax(0,1fr);align-items:center;gap:4px;min-height:322px;margin-top:4px}
+.cockpit-dial{position:relative;min-width:0;aspect-ratio:1.13/1;max-height:380px;display:flex;align-items:center;justify-content:center;align-self:center}
+.cockpit-dial canvas{display:block;width:min(100%,390px);aspect-ratio:1 / 1;height:auto;filter:drop-shadow(0 0 17px #5eecad0d)}
+.cockpit-dial-text{position:absolute;top:42%;left:50%;transform:translate(-50%,-25%);display:flex;flex-direction:column;align-items:center;justify-content:center;white-space:nowrap;pointer-events:none}
+.dial-kicker{font-size:10px;color:#91aaad;font-weight:800;letter-spacing:1.8px}
+.dial-number{font-size:clamp(50px,6.8vw,100px);color:#f9fffd;line-height:1.15;font-weight:900;letter-spacing:-5px;font-variant-numeric:tabular-nums;text-shadow:0 0 26px #b9ff6617}
+.dial-unit{font-size:11px;color:#b8fd70;font-weight:900;letter-spacing:2px}
+.dial-bottom-label{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:#6f9195;font-weight:900;letter-spacing:1px}
+.cockpit-middle{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;margin-top:0;min-width:0}
+.gear-plate{background:linear-gradient(145deg,#152c2e,#091417);border:1px solid #2b6158;box-shadow:inset 0 0 25px #65ee8720,0 0 45px #2b815517;min-width:130px;width:100%;max-width:210px;border-radius:18px;display:flex;flex-direction:column;align-items:center;padding:20px 8px 13px}
+.gear-plate span{font-size:10px;letter-spacing:1.2px;color:#9cbbbb;font-weight:850}
+.gear-plate strong{font-size:clamp(76px,9vw,134px);font-style:italic;font-weight:900;line-height:1;color:#c6ff78;text-shadow:0 0 25px #b6fc6040;font-variant-numeric:tabular-nums}
+.gear-plate small{font-size:10px;color:#7f9d9f;letter-spacing:2px;font-weight:900}
+.cockpit-shift{text-align:center;display:flex;flex-direction:column;gap:4px;min-width:0}
+.cockpit-shift span{font-size:9px;color:#78959a;letter-spacing:1.7px;font-weight:900}
+.cockpit-shift b{color:#d3e8e9;line-height:1.3;font-size:11px;letter-spacing:.1px}
+.cockpit-throttle{width:100%;max-width:220px}
+.cockpit-throttle .split{font-size:9px;color:#8da6ad;font-weight:800;letter-spacing:.35px}
+.cockpit-meter{height:5px;background:#2a4346;border-radius:20px;overflow:hidden;margin-top:7px}
+.cockpit-meter i{display:block;width:0;height:100%;background:linear-gradient(90deg,#8dda82,#c8ff6c);border-radius:15px}
+.cockpit-bottom{border-top:1px solid #2a4144;padding-top:17px;display:grid;grid-template-columns:1.38fr 1.1fr 1.22fr auto;gap:13px;align-items:end}
+.cockpit-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cockpit-field label,.cockpit-field .field-label{font-size:9px;letter-spacing:1.2px;font-weight:900;color:#9aadb9}
+.cockpit-field select{color:#effff5;background:#10202b;border:1px solid #3c545f;border-radius:9px;padding:13px 12px;font-size:12px;font-weight:800;width:100%;min-width:0;min-height:43px}
+.cockpit-mode-group{display:flex;align-items:stretch;gap:4px;background:#0b1720;border:1px solid #2b4650;padding:4px;border-radius:9px;min-height:43px}
+.cockpit-mode-group button{flex:1;min-width:0;background:transparent;border:0;color:#91a7b5;border-radius:5px;padding:8px 5px;font-size:10px;font-weight:900;letter-spacing:.25px;white-space:nowrap}
+.cockpit-mode-group button.active{background:#314e3a;color:#d7ff9c;box-shadow:inset 0 0 0 1px #81b35465}
+.cockpit-start{height:44px;padding:0 17px;color:#102116;background:#b6fc60;border:1px solid #b6fc60;border-radius:9px;font-size:12px;font-weight:950;white-space:nowrap}
+.cockpit-start.playing{background:#ffca83;border-color:#ffca83}
+.cockpit-demo{display:flex;gap:14px;align-items:center;margin-top:14px;border:1px solid #293e44;border-radius:9px;padding:10px 14px;background:#0a141c}
+.cockpit-demo[hidden]{display:none}
+.cockpit-demo-speed{display:flex;align-items:center;gap:13px;flex:1;min-width:0}
+.cockpit-demo-speed span{font-weight:900;font-size:10px;color:#a4bdc0;white-space:nowrap}
+.cockpit-demo-speed input{width:100%;flex:1;min-width:40px;margin:0;accent-color:#b6fc60}
+.cockpit-demo-speed b{min-width:63px;text-align:right;color:#c8ff88;font-size:12px;font-variant-numeric:tabular-nums}
+.hud-pedal{color:#d1f8d2;border:1px solid #4f775a;background:#23462d;border-radius:7px;padding:11px 14px;font-size:11px;font-weight:950;touch-action:none;white-space:nowrap;min-width:135px}
+.hud-pedal.brake{color:#ffc3ad;border-color:#855350;background:#4b282c}
+.hud-pedal.down{box-shadow:inset 0 0 0 2px #b6fc60;background:#497b45}
+.hud-pedal.brake.down{box-shadow:inset 0 0 0 2px #fa837a;background:#77403f}
+.cockpit-info{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;font-size:10px;letter-spacing:.4px;color:#8ca9a9}
+.cockpit-warning{color:#d3a28a;text-align:right}
+body.cockpit-only .hero, body.cockpit-only .topbar,body.cockpit-only .info-strip,body.cockpit-only footer{display:none}
+body.cockpit-only .shell{width:100vw;max-width:none}
+body.cockpit-only .cockpit{min-height:100dvh;border:0;border-radius:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px 2vw}
+body.cockpit-only .cockpit-main{flex:1}
+body.cockpit-only .cockpit-dial{max-height:none}
+body.cockpit-only .cockpit-dial canvas{width:min(100%,min(55vh,510px))}
+@media (max-width:1130px){.cockpit{padding:14px 16px}.cockpit-main{min-height:270px}.cockpit-bottom{grid-template-columns:1.45fr 1.1fr 1.25fr auto;gap:8px}.cockpit-field select{font-size:10px}.cockpit-mode-group button{font-size:8.5px}.cockpit-start{font-size:10px;padding:0 10px}.gear-plate{min-width:95px}.gear-plate strong{font-size:74px}.cockpit-brand b{display:none}}
+@media (max-width:740px){.shell{width:calc(100% - 14px)}.cockpit-top{flex-wrap:wrap}.cockpit-state{order:3;width:100%;font-size:10px}.cockpit-actions button{padding:8px;font-size:9px}.cockpit-main{grid-template-columns:1fr 110px 1fr;gap:0;min-height:150px}.cockpit-dial{aspect-ratio:1/1}.dial-number{font-size:clamp(30px,8vw,60px);letter-spacing:-2px}.dial-kicker{font-size:6px;letter-spacing:.7px}.dial-unit{font-size:7px}.dial-bottom-label{font-size:6px}.gear-plate{min-width:70px;border-radius:10px;padding:12px 4px 7px}.gear-plate span{font-size:6px;letter-spacing:.5px}.gear-plate strong{font-size:clamp(39px,9vw,66px)}.gear-plate small{font-size:7px}.cockpit-middle{gap:6px}.cockpit-shift span{font-size:7px}.cockpit-shift b{font-size:8px}.cockpit-throttle{display:none}.cockpit-bottom{grid-template-columns:1fr 1fr;gap:10px}.cockpit-start{min-height:44px}.cockpit-demo{flex-wrap:wrap}.cockpit-demo-speed{flex-basis:100%}.hud-pedal{flex:1}.cockpit-info{font-size:8px}.hero{display:none}.topbar{padding:9px 0}}
+@media (max-width:390px){.cockpit-main{grid-template-columns:1fr 78px 1fr}.cockpit-brand{font-size:14px}.cockpit-state{font-size:8px}.dial-number{font-size:28px}.gear-plate strong{font-size:41px}.hud-pedal{min-width:80px;padding:10px 5px;font-size:9px}}
+
+/* v0.7: visible brand + model selection and explicit working-audio status */
+.cockpit-bottom { grid-template-columns:minmax(110px,.8fr) minmax(175px,1.45fr) minmax(230px,1.5fr) minmax(220px,1.5fr) auto; align-items:end; gap:9px }
+.cockpit-audio-status { margin-top:12px; padding:10px 14px; min-height:38px; border-radius:9px; border:1px solid #354e5b; background:#10212b; color:#b6d5e0; font-size:12px; font-weight:750 }
+.cockpit-audio-status[data-state="loading"] { border-color:#cdb15f; color:#f0d58b }
+.cockpit-audio-status[data-state="playing"] { border-color:#76b96b; color:#caff9c; background:#173124 }
+.cockpit-audio-status[data-state="error"] { border-color:#c56966; color:#ffd0c5; background:#352023 }
+@media(max-width:1180px){.cockpit-bottom{grid-template-columns:1fr 1.4fr 1.7fr;}.cockpit-start{min-height:45px}.cockpit-bottom>.cockpit-field:nth-child(4){grid-column:1/3}}
+@media(max-width:740px){.cockpit-bottom{grid-template-columns:1fr 1fr}.cockpit-bottom>.cockpit-field:nth-child(4){grid-column:1/3}.cockpit-start{grid-column:1/3}.cockpit-audio-status{font-size:11px}}
+
+</style>
+<style id="cockpit-css">
+
+/* v0.7 — Tablet-first cockpit: performance instrument cluster for browser display */
+html{scroll-behavior:smooth}
+.shell{width:min(1640px,calc(100% - 42px))}
+body{background:radial-gradient(ellipse 90% 30% at 50% 0%,#122c2b 0%,transparent 65%),#060a0f}
+.hero{padding:17px 0 14px}
+.hero h1{font-size:clamp(18px,2.2vw,34px);margin:6px 0 0;letter-spacing:-1px}
+.hero .eyebrow,.hero p,.hero:after{display:none!important}
+.topbar{padding:14px 0 12px}
+#settingsPanel{display:none}
+#settingsHead[hidden]{display:none}
+.settings-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 11px;color:#b9cada;font-size:12px;letter-spacing:.7px}
+.settings-head span{font-size:11px;color:#8195a8}
+body.settings-open #settingsPanel{display:grid}
+.cockpit{background:radial-gradient(ellipse 45% 45% at 50% 48%,#15302855,transparent 85%),linear-gradient(160deg,#121d29 0%,#090f18 55%,#111e24 100%);border:1px solid #375251;box-shadow:0 18px 70px #0008,inset 0 0 60px #102f2d45;border-radius:22px;overflow:hidden;position:relative;padding:18px 26px 14px}
+.cockpit:before{content:"";height:3px;position:absolute;top:0;left:11%;right:11%;background:linear-gradient(90deg,transparent,#b6fc60,transparent);opacity:.8}
+.cockpit-top{display:flex;align-items:center;gap:14px;justify-content:space-between}
+.cockpit-brand{white-space:nowrap;font-style:italic;color:#f2fcff;font-size:17px;font-weight:1000;letter-spacing:-.5px;display:flex;align-items:center;gap:9px}
+.cockpit-brand b{color:#a5b5be;font-size:10px;font-style:normal;letter-spacing:2px;margin-left:7px}
+.beacon{display:inline-block;width:9px;height:9px;background:#b6fc60;border-radius:50%;box-shadow:0 0 0 6px #c6ff7414,0 0 16px #b6fc6090}
+.cockpit-state{display:flex;align-items:center;gap:9px;color:#9cbbc3;font-size:11px;font-weight:800;letter-spacing:.8px}
+.dot-sep{color:#50636b}
+.cockpit-actions{display:flex;align-items:center;gap:7px}
+.cockpit-actions button{color:#bcd5db;border:1px solid #345050;border-radius:8px;background:#192a2d;padding:10px 11px;font-size:10px;font-weight:900;letter-spacing:.7px}
+.cockpit-actions button:hover{background:#284841}
+.cockpit-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,0.46fr) minmax(0,1fr);align-items:center;gap:4px;min-height:322px;margin-top:4px}
+.cockpit-dial{position:relative;min-width:0;aspect-ratio:1.13/1;max-height:380px;display:flex;align-items:center;justify-content:center;align-self:center}
+.cockpit-dial canvas{display:block;width:min(100%,390px);aspect-ratio:1 / 1;height:auto;filter:drop-shadow(0 0 17px #5eecad0d)}
+.cockpit-dial-text{position:absolute;top:42%;left:50%;transform:translate(-50%,-25%);display:flex;flex-direction:column;align-items:center;justify-content:center;white-space:nowrap;pointer-events:none}
+.dial-kicker{font-size:10px;color:#91aaad;font-weight:800;letter-spacing:1.8px}
+.dial-number{font-size:clamp(50px,6.8vw,100px);color:#f9fffd;line-height:1.15;font-weight:900;letter-spacing:-5px;font-variant-numeric:tabular-nums;text-shadow:0 0 26px #b9ff6617}
+.dial-unit{font-size:11px;color:#b8fd70;font-weight:900;letter-spacing:2px}
+.dial-bottom-label{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px;color:#6f9195;font-weight:900;letter-spacing:1px}
+.cockpit-middle{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;margin-top:0;min-width:0}
+.gear-plate{background:linear-gradient(145deg,#152c2e,#091417);border:1px solid #2b6158;box-shadow:inset 0 0 25px #65ee8720,0 0 45px #2b815517;min-width:130px;width:100%;max-width:210px;border-radius:18px;display:flex;flex-direction:column;align-items:center;padding:20px 8px 13px}
+.gear-plate span{font-size:10px;letter-spacing:1.2px;color:#9cbbbb;font-weight:850}
+.gear-plate strong{font-size:clamp(76px,9vw,134px);font-style:italic;font-weight:900;line-height:1;color:#c6ff78;text-shadow:0 0 25px #b6fc6040;font-variant-numeric:tabular-nums}
+.gear-plate small{font-size:10px;color:#7f9d9f;letter-spacing:2px;font-weight:900}
+.cockpit-shift{text-align:center;display:flex;flex-direction:column;gap:4px;min-width:0}
+.cockpit-shift span{font-size:9px;color:#78959a;letter-spacing:1.7px;font-weight:900}
+.cockpit-shift b{color:#d3e8e9;line-height:1.3;font-size:11px;letter-spacing:.1px}
+.cockpit-throttle{width:100%;max-width:220px}
+.cockpit-throttle .split{font-size:9px;color:#8da6ad;font-weight:800;letter-spacing:.35px}
+.cockpit-meter{height:5px;background:#2a4346;border-radius:20px;overflow:hidden;margin-top:7px}
+.cockpit-meter i{display:block;width:0;height:100%;background:linear-gradient(90deg,#8dda82,#c8ff6c);border-radius:15px}
+.cockpit-bottom{border-top:1px solid #2a4144;padding-top:17px;display:grid;grid-template-columns:1.38fr 1.1fr 1.22fr auto;gap:13px;align-items:end}
+.cockpit-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cockpit-field label,.cockpit-field .field-label{font-size:9px;letter-spacing:1.2px;font-weight:900;color:#9aadb9}
+.cockpit-field select{color:#effff5;background:#10202b;border:1px solid #3c545f;border-radius:9px;padding:13px 12px;font-size:12px;font-weight:800;width:100%;min-width:0;min-height:43px}
+.cockpit-mode-group{display:flex;align-items:stretch;gap:4px;background:#0b1720;border:1px solid #2b4650;padding:4px;border-radius:9px;min-height:43px}
+.cockpit-mode-group button{flex:1;min-width:0;background:transparent;border:0;color:#91a7b5;border-radius:5px;padding:8px 5px;font-size:10px;font-weight:900;letter-spacing:.25px;white-space:nowrap}
+.cockpit-mode-group button.active{background:#314e3a;color:#d7ff9c;box-shadow:inset 0 0 0 1px #81b35465}
+.cockpit-start{height:44px;padding:0 17px;color:#102116;background:#b6fc60;border:1px solid #b6fc60;border-radius:9px;font-size:12px;font-weight:950;white-space:nowrap}
+.cockpit-start.playing{background:#ffca83;border-color:#ffca83}
+.cockpit-demo{display:flex;gap:14px;align-items:center;margin-top:14px;border:1px solid #293e44;border-radius:9px;padding:10px 14px;background:#0a141c}
+.cockpit-demo[hidden]{display:none}
+.cockpit-demo-speed{display:flex;align-items:center;gap:13px;flex:1;min-width:0}
+.cockpit-demo-speed span{font-weight:900;font-size:10px;color:#a4bdc0;white-space:nowrap}
+.cockpit-demo-speed input{width:100%;flex:1;min-width:40px;margin:0;accent-color:#b6fc60}
+.cockpit-demo-speed b{min-width:63px;text-align:right;color:#c8ff88;font-size:12px;font-variant-numeric:tabular-nums}
+.hud-pedal{color:#d1f8d2;border:1px solid #4f775a;background:#23462d;border-radius:7px;padding:11px 14px;font-size:11px;font-weight:950;touch-action:none;white-space:nowrap;min-width:135px}
+.hud-pedal.brake{color:#ffc3ad;border-color:#855350;background:#4b282c}
+.hud-pedal.down{box-shadow:inset 0 0 0 2px #b6fc60;background:#497b45}
+.hud-pedal.brake.down{box-shadow:inset 0 0 0 2px #fa837a;background:#77403f}
+.cockpit-info{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;font-size:10px;letter-spacing:.4px;color:#8ca9a9}
+.cockpit-warning{color:#d3a28a;text-align:right}
+body.cockpit-only .hero, body.cockpit-only .topbar,body.cockpit-only .info-strip,body.cockpit-only footer{display:none}
+body.cockpit-only .shell{width:100vw;max-width:none}
+body.cockpit-only .cockpit{min-height:100dvh;border:0;border-radius:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px 2vw}
+body.cockpit-only .cockpit-main{flex:1}
+body.cockpit-only .cockpit-dial{max-height:none}
+body.cockpit-only .cockpit-dial canvas{width:min(100%,min(55vh,510px))}
+@media (max-width:1130px){.cockpit{padding:14px 16px}.cockpit-main{min-height:270px}.cockpit-bottom{grid-template-columns:1.45fr 1.1fr 1.25fr auto;gap:8px}.cockpit-field select{font-size:10px}.cockpit-mode-group button{font-size:8.5px}.cockpit-start{font-size:10px;padding:0 10px}.gear-plate{min-width:95px}.gear-plate strong{font-size:74px}.cockpit-brand b{display:none}}
+@media (max-width:740px){.shell{width:calc(100% - 14px)}.cockpit-top{flex-wrap:wrap}.cockpit-state{order:3;width:100%;font-size:10px}.cockpit-actions button{padding:8px;font-size:9px}.cockpit-main{grid-template-columns:1fr 110px 1fr;gap:0;min-height:150px}.cockpit-dial{aspect-ratio:1/1}.dial-number{font-size:clamp(30px,8vw,60px);letter-spacing:-2px}.dial-kicker{font-size:6px;letter-spacing:.7px}.dial-unit{font-size:7px}.dial-bottom-label{font-size:6px}.gear-plate{min-width:70px;border-radius:10px;padding:12px 4px 7px}.gear-plate span{font-size:6px;letter-spacing:.5px}.gear-plate strong{font-size:clamp(39px,9vw,66px)}.gear-plate small{font-size:7px}.cockpit-middle{gap:6px}.cockpit-shift span{font-size:7px}.cockpit-shift b{font-size:8px}.cockpit-throttle{display:none}.cockpit-bottom{grid-template-columns:1fr 1fr;gap:10px}.cockpit-start{min-height:44px}.cockpit-demo{flex-wrap:wrap}.cockpit-demo-speed{flex-basis:100%}.hud-pedal{flex:1}.cockpit-info{font-size:8px}.hero{display:none}.topbar{padding:9px 0}}
+@media (max-width:390px){.cockpit-main{grid-template-columns:1fr 78px 1fr}.cockpit-brand{font-size:14px}.cockpit-state{font-size:8px}.dial-number{font-size:28px}.gear-plate strong{font-size:41px}.hud-pedal{min-width:80px;padding:10px 5px;font-size:9px}}
+
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="REV SHIFT home"><span class="brand-icon">R<span>\</span></span><span>REV<span class="slash">//</span>SHIFT<small>REAL FREE SOUND LAB</small></span></a>
+    <div class="head-right"><span class="status-led" id="statusLed"></span><span id="topStatus">READY TO CONNECT</span><span class="vtag">v0.7 AUDIO FIX</span></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow"><i></i> REAL ENGINE RECORDINGS. ZERO SYNTH.</div>
+      <h1>YOUR EV. <em>YOUR COCKPIT.</em></h1>
+      <p>หน้าปัดความเร็ว + RPM + เกียร์จำลอง สำหรับหน้าจอ XPENG G6/X9 · ไฟล์เสียงจริงออนไลน์จากต้นทางที่มีใบอนุญาต · ยังไม่ใช่ Sound Bank หลายช่วง RPM</p>
+    </section>
+
+    <section class="cockpit" id="cockpit" aria-label="หน้าปัดเรือนไมล์ REV SHIFT">
+      <div class="cockpit-top">
+        <div class="cockpit-brand"><span class="beacon"></span><span>REV//SHIFT <b>LIVE COCKPIT</b></span></div>
+        <div class="cockpit-state"><span id="hudVehicle">XPENG G6</span><span class="dot-sep">·</span><span id="hudSource">SIMULATOR</span><span class="dot-sep">·</span><span id="hudGps">NO GPS FIX</span></div>
+        <div class="cockpit-actions"><button id="hudFullscreen" type="button" title="เต็มหน้าจอ">⛶ FULL SCREEN</button><button id="hudOptions" type="button" aria-expanded="false">⚙ SETTINGS</button></div>
+      </div>
+      <div class="cockpit-main">
+        <div class="cockpit-dial speed-side">
+          <canvas id="hudSpeedDial" width="460" height="460" aria-label="มาตรวัดความเร็วจาก GPS หรือ Simulation"></canvas>
+          <div class="cockpit-dial-text"><span class="dial-kicker">VEHICLE SPEED</span><div class="dial-number" id="hudSpeed">0</div><span class="dial-unit">KM/H</span></div>
+          <span class="dial-bottom-label">0 — 240 KM/H</span>
+        </div>
+        <div class="cockpit-middle">
+          <div class="gear-plate"><span>VIRTUAL GEAR</span><strong id="hudGear">1</strong><small>AUTO <span id="hudGearTotal">/ 6</span></small></div>
+          <div class="cockpit-shift"><span>LAST SHIFT</span><b id="hudShift">READY TO DRIVE</b></div>
+          <div class="cockpit-throttle"><div class="split"><span>EST. THROTTLE / LOAD</span><span id="hudLoadText">0%</span></div><div class="cockpit-meter"><i id="hudLoad"></i></div></div>
+        </div>
+        <div class="cockpit-dial rpm-side">
+          <canvas id="hudRpmDial" width="460" height="460" aria-label="มาตรวัดรอบเครื่องยนต์จำลอง"></canvas>
+          <div class="cockpit-dial-text"><span class="dial-kicker">SIMULATED ENGINE RPM</span><div class="dial-number" id="hudRpm">0.9</div><span class="dial-unit">x 1000 RPM</span></div>
+          <span class="dial-bottom-label" id="hudRpmLimit">REDLINE 9,000 RPM</span>
+        </div>
+      </div>
+      <div class="cockpit-bottom">
+        <div class="cockpit-field"><label for="hudBrandSelect">CAR BRAND</label><select id="hudBrandSelect" aria-label="เลือกแบรนด์รถ"></select></div>
+        <div class="cockpit-field"><label for="hudProfileSelect">CAR MODEL · REAL AUDIO</label><select id="hudProfileSelect" aria-label="เลือกรุ่นรถที่มีบันทึกจริง"></select></div>
+        <div class="cockpit-field"><span class="field-label">SOUND MODE</span><div class="cockpit-mode-group" role="group" aria-label="โหมดเสียง"><button type="button" data-hud-drive="comfort">COMFORT</button><button type="button" data-hud-drive="normal" class="active">NORMAL</button><button type="button" data-hud-drive="sport">SPORT</button></div></div>
+        <div class="cockpit-field"><span class="field-label">SPEED SOURCE</span><div class="cockpit-mode-group input-group"><button data-hud-input="demo" class="active" type="button">DEMO</button><button data-hud-input="phone" type="button">PHONE GPS</button><button data-hud-input="dashboard" type="button">PHONE SYNC</button></div></div>
+        <button type="button" class="cockpit-start" id="hudAudioBtn">▶ START SOUND</button>
+      </div>
+      <div id="hudAudioStatus" class="cockpit-audio-status" role="status" aria-live="polite" data-state="idle">เลือกแบรนด์และรุ่นรถ แล้วกด START SOUND</div>
+      <div class="cockpit-demo" id="hudDemoControls">
+        <div class="cockpit-demo-speed"><span>DEMO SPEED</span><input id="hudSpeedSlider" type="range" min="0" max="240" value="0" step="1" aria-label="ความเร็วจำลอง"/><b id="hudSpeedSliderLabel">0 km/h</b></div>
+        <button type="button" class="hud-pedal gas" id="hudGas">▲ HOLD GAS</button>
+        <button type="button" class="hud-pedal brake" id="hudBrake">▼ HOLD BRAKE</button>
+      </div>
+      <div class="cockpit-info"><span id="hudInfo">DEMO DATA · RPM และเกียร์เป็นการจำลอง</span><span class="cockpit-warning">ตั้งค่าขณะจอด · ห้ามโต้ตอบหน้าจอระหว่างขับ</span></div>
+    </section>
+    <div class="settings-head" id="settingsHead" hidden><strong>ADVANCED SETTINGS / PAIRING / AUDIO SOURCES</strong><span>เลือกใช้งานและตั้งค่าขณะรถจอดเท่านั้น</span></div>
+    <section class="main-grid" id="settingsPanel">
+      <div class="left-stack">
+        <section class="panel drive-panel">
+          <div class="panel-head"><div><span class="section-kicker">01 / LIVE TELEMETRY</span><h2>DRIVE CONSOLE</h2></div><span class="pill" id="sourcePill">DEMO INPUT</span></div>
+          <div class="mode-tabs" role="group" aria-label="โหมดการใช้งาน">
+            <button class="mode active" data-mode="demo" type="button">SIMULATOR</button>
+            <button class="mode" data-mode="phone" type="button">PHONE ONLY</button>
+            <button class="mode" data-mode="dashboard" type="button">CAR SCREEN + PHONE</button>
+          </div>
+          <div class="gauge-wrap">
+            <canvas id="gauge" width="520" height="296" aria-label="มาตรวัดความเร็ว"></canvas>
+            <div class="gauge-center"><div class="speed-number" id="speedNumber">0</div><div class="speed-unit">km/h</div></div>
+          </div>
+          <div class="telemetry-grid">
+            <div class="telemetry"><small>SIMULATED RPM</small><strong id="rpmValue">900</strong><div class="minibar"><span id="rpmBar"></span></div></div>
+            <div class="telemetry"><small>VIRTUAL GEAR</small><strong id="gearValue">1<span class="muted-unit"> / 6</span></strong><div class="minibar"><span id="gearBar"></span></div></div>
+            <div class="telemetry"><small>GPS ACCURACY</small><strong id="gpsAccuracy">—</strong><div class="minibar"><span id="gpsBar"></span></div></div>
+          </div>
+          <div class="control-group" id="demoControls">
+            <div class="split"><label for="speedSlider">จำลองความเร็วรถ</label><span class="value-badge"><b id="demoSpeedLabel">0</b> km/h</span></div>
+            <input type="range" id="speedSlider" min="0" max="240" value="0" step="1" />
+            <div class="slider-ends"><span>0 km/h</span><span>120</span><span>240 km/h</span></div>
+            <div class="pedal-pad" role="group" aria-label="ทดสอบคันเร่งและเบรก">
+              <button class="pedal gas" type="button" id="gasPedal">▲ HOLD GAS<small>กดค้างเพื่อเร่ง</small></button>
+              <button class="pedal brake" type="button" id="brakePedal">▼ HOLD BRAKE<small>กดค้างเพื่อลดความเร็ว</small></button>
+            </div>
+            <div class="shift-ledger"><span>SHIFT EVENT</span><b id="shiftEvent">READY · AUTO</b></div>
+            <p class="minor">โหมดทดลอง: กดค้าง GAS/BRAKE หรือใช้ ↑ / ↓ บนคีย์บอร์ด • RPM และเกียร์เป็นการจำลอง ไม่ใช่ข้อมูลเกียร์จาก XPENG</p>
+          </div>
+          <div class="control-group hidden" id="gpsControls">
+            <button id="gpsButton" type="button" class="outline-btn"><span class="material-dot"></span> ALLOW GPS + MOTION</button>
+            <p class="minor" id="gpsNote">ต้องเปิดผ่าน HTTPS และอนุญาตตำแหน่ง/การเคลื่อนไหว มือถือควรอยู่ในแท่นยึด</p>
+          </div>
+          <div class="control-group hidden" id="pairControls">
+            <div class="pair-head"><strong>SYNC PHONE → CAR SCREEN</strong><span class="pair-status" id="pairStatus">OFFLINE</span></div>
+            <div class="pair-body">
+              <div class="qrbox"><img id="qrImage" alt="QR code สำหรับจับคู่มือถือ"/><div id="qrPlaceholder">QR</div></div>
+              <div class="pair-desc"><small>PAIRING CODE</small><strong class="pair-code" id="pairCode">--------</strong><p>ใช้มือถือสแกน QR → กด Allow GPS / Motion → ข้อมูลความเร็วจะถูกส่งมายังจอรถ</p><button type="button" class="small-btn" id="newRoom">สร้างรหัสใหม่</button></div>
+            </div>
+            <p class="minor">จอรถและมือถือเปิดเว็บเดียวกันได้ผ่าน HTTPS; ต้องมีเซิร์ฟเวอร์สำหรับ Sync ไม่ได้เชื่อมระบบรถโดยตรง</p>
+          </div>
+          <div class="control-group hidden" id="phonePairControls"><div class="pair-head"><strong>SENDING TO CAR</strong><span class="pair-status" id="phonePairStatus">CONNECTING...</span></div><p class="minor">มือถือส่งเฉพาะความเร็ว/ค่าการเคลื่อนไหว ไม่ส่งพิกัด GPS ไปยังจอรถ</p></div>
+          <div class="statusline"><span id="sensorText">Simulator ready — เลื่อนความเร็วเพื่อทดลอง</span><span id="gpsAge"></span></div>
+        </section>
+        <section class="panel sound-panel">
+          <div class="panel-head"><div><span class="section-kicker">02 / REAL-SAMPLE ENGINE</span><h2>AUDIO CONTROL</h2></div><span class="live-dot">INTERACTIVE ENGINE · REAL SAMPLES</span></div>
+          <div class="selected-engine"><div class="selected-engine-name"><small>SELECTED SOUND PROFILE</small><strong id="selectedTitle">Honda S2000 (2002) F20C</strong><span id="selectedSub">F20C · Real engine bay field recording</span></div><div class="engine-stamp" id="engineStamp">I4</div></div>
+          <div class="audio-controls"><button class="primary-btn" type="button" id="audioBtn"><span id="audioIcon">▶</span><span id="audioBtnText">START ENGINE AUDIO</span></button><button class="outline-btn rev-btn" type="button" id="revBtn">FREE REV / BLIP</button></div>
+          <div class="sound-settings"><div class="setting-row"><label for="volumeSlider">VOLUME <span id="volumeLabel">35%</span></label><input type="range" id="volumeSlider" min="0" max="100" step="1" value="35" /></div><div class="setting-row"><label for="vehicleSelect">YOUR EV</label><select id="vehicleSelect"><option value="g6">XPENG G6</option><option value="x9">XPENG X9</option><option value="other">OTHER EV (UNIVERSAL)</option></select></div></div>
+          
+          <div class="setting-stack"><div class="split"><span class="mode-label">SOUND DRIVE MODE</span><span class="mode-help" id="modeSummary">เสียงสมดุล ไม่ดังเกินไป</span></div><div class="sound-tabs three" id="soundModeTabs" role="group" aria-label="Sound mode"><button class="sound-tab" data-sound-mode="comfort" type="button">COMFORT <small>นุ่ม / เงียบ</small></button><button class="sound-tab active" data-sound-mode="normal" type="button">NORMAL <small>สมดุล</small></button><button class="sound-tab" data-sound-mode="sport" type="button">SPORT <small>จัดเต็ม</small></button></div></div>
+          <div class="setting-stack recording-panel"><div class="split"><span class="mode-label">AUDIO SOURCE</span><span class="mode-help" id="sampleStatus">RECORDED AUDIO</span></div><a id="sourceLink" class="outline-btn" target="_blank" rel="noopener noreferrer">SOURCE · LICENSE ↗</a><p id="sourceCaption" class="minor"></p></div>
+          <div class="audio-recovery" id="audioRecovery">
+  <strong>เสียงจริงจากไฟล์ฟรี — ดาวน์โหลดหรือเลือกไฟล์ในเครื่อง</strong>
+  <p>ถ้าเว็บโหลดเสียงออนไลน์ไม่ได้ ให้กด SOURCE ดาวน์โหลดไฟล์ต้นฉบับฟรี แล้วเลือกไฟล์นั้นจากเครื่อง วิธีนี้เล่นได้โดยไม่ต้องสตรีมผ่านเว็บไซต์อื่น</p>
+  <div class="link-row"><a id="downloadOriginal" target="_blank" rel="noopener noreferrer">DOWNLOAD ORIGINAL ↗</a><a id="viewLicense" target="_blank" rel="noopener noreferrer">LICENSE ↗</a></div>
+  <label for="localAudioFile">ใช้ไฟล์เสียงจริงที่ดาวน์โหลดมาแล้ว (.ogg / .mp3 / .wav)</label>
+  <input type="file" id="localAudioFile" accept="audio/*,.ogg,.oga,.mp3,.wav,.m4a,.aac,.flac" />
+  <span id="downloadStatus" role="status">ยังไม่ได้เลือกไฟล์ในเครื่อง · เว็บจะลองไฟล์ในโฟลเดอร์ sounds/ แล้วจึงลองเสียงออนไลน์</span>
+</div><div class="bank-panel">
+  <strong>REAL ENGINE SOUND BANK <span id="bankCount" style="color:var(--lime)">0 / 7</span></strong>
+  <p class="minor">ใช้เสียงที่บันทึกจากเครื่องยนต์จริงของรุ่นที่เลือก แยกช่วงรอบเครื่องและเสียงเกียร์ ถ้ามีอย่างน้อย 1 ไฟล์เสียง Engine Loop ระบบจะเล่นผ่าน Web Audio โดยปรับ RPM/โหลด/เกียร์แบบต่อเนื่อง ส่วนเสียงเกียร์ต้องมีคลิปจริงของช่วงนั้น</p>
+  <div class="bank-grid" id="bankInputs">
+    <label>IDLE (รอบเดินเบา)<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="idle"/></label>
+    <label>LOW RPM (~2,500)<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="low"/></label>
+    <label>MID RPM (~4,500)<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="mid"/></label>
+    <label>HIGH RPM (~7,000)<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="high"/></label>
+    <label>DECEL / OFF THROTTLE<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="decel"/></label>
+    <label>SHIFT UP (เสียงจริง)<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="up"/></label>
+    <label>SHIFT DOWN / REV MATCH<input type="file" accept="audio/*,.wav,.mp3,.ogg,.m4a" data-bank-role="down"/></label>
+  </div>
+  <div id="bankStatus" class="minor" role="status">ยังไม่มี Sound Bank ครบ · คลิปฟรีจากแหล่งเดิมเป็นแค่บันทึกเสียงทั่วไป ไม่ได้แยกตาม RPM</div>
+</div>
+<p class="minor caution">สำคัญ: มีเสียงเกียร์ขึ้น–ลงจริงได้ก็ต่อเมื่อมีคลิปบันทึกจากเครื่องยนต์รุ่นนั้นในช่อง SHIFT UP / SHIFT DOWN · ถ้าไม่มี ระบบจะทำเพียงจำลอง RPM กระโดดและปรับเสียงเครื่องตามจริงที่มี ไม่สร้างเสียงเครื่องยนต์ปลอมเพิ่ม</p>
+        </section>
+      </div>
+      <section class="panel library-panel">
+        <div class="panel-head"><div><span class="section-kicker">03 / ENGINE LIBRARY</span><h2>CHOOSE YOUR SOUND</h2></div><span class="pill" id="engineCount">0 PROFILES</span></div>
+        <div class="library-lead">แสดงเฉพาะรุ่นที่ตรวจพบไฟล์เสียงรถจริงจากผู้บันทึกเอง พร้อมใบอนุญาตใช้ฟรี · รุ่นที่ยังไม่มีเสียงตัดออกจาก UI แล้ว</div>
+        <div class="filters"><button class="filter active" type="button" data-region="japan">🇯🇵 JAPAN</button><button class="filter" type="button" data-region="europe">🇪🇺 EUROPE</button><button class="filter" type="button" data-region="all">ALL</button></div>
+        <label class="searchbar"><span>⌕</span><input id="searchEngines" placeholder="ค้นหา Honda S2000, Toyota, Porsche, BMW..." autocomplete="off" /></label>
+        <div class="brand-filters" id="brandFilters"></div>
+        <div class="engine-list" id="engineList"></div>
+      </section>
+    </section>
+    <section class="info-strip"><div><strong>UNIVERSAL EV</strong><span>เล่นผ่านมือถือ + Bluetooth ของรถ หรือเบราว์เซอร์บนจอรถที่รองรับ</span></div><div><strong>GPS + MOTION</strong><span>GPS ให้ค่าความเร็ว ส่วนเซนเซอร์การเคลื่อนไหวช่วยให้เสียงตอบสนองเร็วขึ้น</span></div><div><strong>ZERO ECU ACCESS</strong><span>ไม่ต่อระบบควบคุมรถ ไม่มีคำสั่งเข้ารถ และไม่เปลี่ยนการทำงานของรถ</span></div></section>
+    <footer><span>REV//SHIFT · INDEPENDENT PROTOTYPE</span><span>ตั้งค่าก่อนขับ / อย่าจับมือถือหรือเปลี่ยนโปรไฟล์ระหว่างขับ / เปิดเสียงระดับที่ยังได้ยินสัญญาณเตือน</span></footer>
+  </main>
+</div>
+
+<script>
+
+'use strict';
+// REAL FIELD RECORDINGS ONLY — no synthesized engine profiles, no unlicensed placeholders.
+// Audio is served by Wikimedia Commons on demand. The archive does not redistribute sound files.
+const PROFILES = [
+ {id:'s2000',region:'japan',brand:'Honda',model:'S2000 (2002) F20C',engine:'F20C · ไฟล์บันทึกเสียงเครื่องจริงจากห้องเครื่อง · ประเภทท่อไม่ระบุ',type:'I4',cyl:4,idle:900,redline:9000,gears:6,filename:'2002-Honda-F20C.ogg',author:'Tyler Riddle',license:'CC BY 3.0',licenseUrl:'https://creativecommons.org/licenses/by/3.0/',duration:'2:17',ext:'ogg',directUrl:'https://upload.wikimedia.org/wikipedia/commons/0/0d/2002-Honda-F20C.ogg'},
+ {id:'auris',region:'japan',brand:'Toyota',model:'Auris Andros Trophy (2010)',engine:'รถแข่ง V6 3.0 L · เสียงเร่งออกตัวจากสนามจริง',type:'V6',cyl:6,idle:900,redline:7600,gears:6,filename:'Toyota Auris Andros Trophy (2010).ogg',author:'Edvvc',license:'CC BY-SA 3.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/3.0/',duration:'0:14',ext:'ogg',directUrl:'https://upload.wikimedia.org/wikipedia/commons/6/63/Toyota_Auris_Andros_Trophy_%282010%29.ogg'},
+ {id:'cayman',region:'europe',brand:'Porsche',model:'Cayman S (2006)',engine:'Flat-6 · บันทึกตอนเร่งออกตัวจากรถจริง',type:'F6',cyl:6,idle:900,redline:7200,gears:6,filename:'2006 Porsche Cayman S engine sound.wav',author:'John64',license:'CC BY-SA 3.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/3.0/',duration:'0:33',ext:'wav',directUrl:'https://upload.wikimedia.org/wikipedia/commons/6/68/2006_Porsche_Cayman_S_engine_sound.wav'},
+ {id:'gt3rs',region:'europe',brand:'Porsche',model:'911 GT3 RS (997, 2009)',engine:'Flat-6 · เสียงรถวิ่งออกตัวใน Goodwood Festival of Speed',type:'F6',cyl:6,idle:1000,redline:8400,gears:6,filename:'Porsche 997 GT3 RS.ogg',author:'Edvvc',license:'CC BY-SA 3.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/3.0/',duration:'0:11',ext:'ogg',directUrl:'https://upload.wikimedia.org/wikipedia/commons/4/4c/Porsche_997_GT3_RS.ogg'},
+ {id:'boxster',region:'europe',brand:'Porsche',model:'Boxster S 987 (3.4L)',engine:'Flat-6 · เร่งความเร็วในห้องโดยสารจริง',type:'F6',cyl:6,idle:900,redline:7200,gears:6,filename:'Boxster 987 S 3.4l in-car acceleration wet conditions.ogg',author:'Edvvc',license:'CC BY-SA 3.0',licenseUrl:'https://creativecommons.org/licenses/by-sa/3.0/',duration:'0:16',ext:'ogg',directUrl:'https://upload.wikimedia.org/wikipedia/commons/f/fa/Boxster_987_S_3.4l_in-car_acceleration_wet_conditions.ogg'},
+];
+const filePage=p=>`https://commons.wikimedia.org/wiki/File:${encodeURIComponent(p.filename).replace(/%2F/g,'/')}`;
+// Use exact original-file URLs from the Commons source pages rather than a redirect endpoint.
+const audioUrl=p=>p.directUrl;
+// Wikimedia transcodes are standard MP3 and play in iPhone Safari; the original remains a fallback.
+// These are the source recordings of the named real cars; no generated engine tone is used.
+const mp3AudioUrl=p=>{
+ const u=new URL(p.directUrl);const file=decodeURIComponent(u.pathname.split('/').pop());
+ const parts=u.pathname.split('/');const hash=parts.slice(-3,-1).join('/');
+ return `https://upload.wikimedia.org/wikipedia/commons/transcoded/${hash}/${encodeURIComponent(file)}/${encodeURIComponent(file)}.mp3`;
+};
+const fallbackAudioUrl=p=>`https://commons.wikimedia.org/wiki/Special:Redirect/file/${encodeURIComponent(p.filename)}`;
+const localAudioUrl=p=>`./sounds/${p.id}.${p.ext}`;
+const localObjects=new Map();
+const oldBlobURLs=new Set();
+const DRIVE_TUNING={
+ comfort:{label:'COMFORT',level:.52,attack:.55,shift:.60},
+ normal:{label:'NORMAL',level:.78,attack:1.0,shift:.78},
+ sport:{label:'SPORT',level:1.0,attack:1.5,shift:.94}
+};
+let soundDriveMode='normal',vehicle='g6';
+const byId=id=>document.getElementById(id);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+let profile=PROFILES[0],region='japan',brand='All',mode='demo';
+let gpsWatch=null,gpsRaw=null,lastFix=null,gpsAgeMs=Infinity,motionAmount=0,motionSmoothed=0;
+let screenSpeed=0,speedTarget=0,demoSpeed=0,rpm=profile.idle,currentGear=1,throttle=0;
+let isRevving=false,isAudioPlaying=false,sound=null,lastFrame=performance.now(),speedDelta=0;
+let gasHeld=false,brakeHeld=false,filteredGas=0,manualDemo=false,shiftUntil=0,shiftCutUntil=0;
+let lastShiftTime=-100000,revMatchUntil=0,revMatchPulse=0,lastEventKind='';
+const audioBanks=new Map(); // Only real audio clips chosen by the user; no generated engine sound.
+const RPM_ANCHORS={idle:0,low:2500,mid:4500,high:7000,decel:3000};
+function getBank(){if(!audioBanks.has(profile.id))audioBanks.set(profile.id,new Map());return audioBanks.get(profile.id);}
+function paintBank(){const bank=getBank();byId('bankCount').textContent=bank.size+' / 7';
+ document.querySelectorAll('[data-bank-role]').forEach(el=>el.closest('label').classList.toggle('ready',bank.has(el.dataset.bankRole)));
+ const loops=['idle','low','mid','high','decel'].filter(k=>bank.has(k));
+ byId('bankStatus').textContent=loops.length?(loops.length>=3?'Multi-sample พร้อมทดลอง ·':'มีเพียง '+loops.length+' ช่วง RPM · เสียงยังไม่ครบ ·')+' '+[...bank.keys()].join(', '):'ยังไม่ได้เพิ่ม RPM Loop · เว็บจะใช้คลิปเสียงจริงเดิมแบบ Preview (ยังไม่ใช่ Sound Bank เต็มรูปแบบ)';
+}
+
+let room=null,socket=null,paired=false,phoneRoom=new URLSearchParams(location.search).get('room');
+const wsProtocol=location.protocol==='https:'?'wss:':'ws:';
+let lastPacketTime=0,lastSendTime=0;
+function buildBrands(){
+ const visible=PROFILES.filter(p=>region==='all'||p.region===region);
+ const brands=['All',...new Set(visible.map(p=>p.brand))];
+ if(!brands.includes(brand))brand='All';
+ byId('brandFilters').replaceChildren(...brands.map(name=>{
+   const el=document.createElement('button');el.type='button';el.className='brand-chip'+(name===brand?' active':'');el.textContent=name;el.onclick=()=>{brand=name;renderLibrary()};return el;
+ }));
+}
+function renderLibrary(){
+ buildBrands();
+ const term=byId('searchEngines').value.trim().toLowerCase();
+ const visible=PROFILES.filter(p=>(region==='all'||region===p.region)&&(brand==='All'||p.brand===brand)&&`${p.brand} ${p.model} ${p.engine} ${p.type}`.toLowerCase().includes(term));
+ byId('engineCount').textContent=`${visible.length} PROFILES`;
+ const list=byId('engineList');list.replaceChildren();
+ if(!visible.length){const x=document.createElement('div');x.className='empty-state';x.textContent='ไม่พบรุ่นรถที่ค้นหา';list.appendChild(x);return;}
+ for(const p of visible){
+   const card=document.createElement('button');card.type='button';card.className='engine-card'+(p===profile?' selected':'');card.setAttribute('aria-pressed',String(p===profile));
+   const graphic=document.createElement('span');graphic.className='engine-graphic';const tag=document.createElement('b');tag.textContent=p.type;graphic.appendChild(tag);
+   const info=document.createElement('span');info.className='engine-info';
+   const br=document.createElement('small');br.textContent=p.brand.toUpperCase();
+   const name=document.createElement('strong');name.textContent=p.model;
+   const desc=document.createElement('span');desc.textContent=p.engine+' · '+p.license+' · '+p.duration;
+   info.append(br,name,desc);
+   const check=document.createElement('span');check.className='engine-check';check.textContent=p===profile?'✓':'›';
+   card.append(graphic,info,check);
+   card.addEventListener('click',()=>setProfile(p));list.appendChild(card);
+ }
+}
+function setProfile(p){
+ const prior=profile;
+ profile=p;currentGear=1;rpm=p.idle;
+ byId('selectedTitle').textContent=`${p.brand} ${p.model}`;
+ byId('selectedSub').textContent=p.engine;
+ byId('engineStamp').textContent=p.type;
+ if(sound){sound.applyProfile(p);sound.setTuning(null,soundDriveMode);sound.gearShift();}
+ updateSourceInfo();
+ paintBank();
+ renderLibrary();
+ if(prior!==p){setHudAudioState('idle',`เลือก ${p.brand} ${p.model} แล้ว · กด START SOUND`);byId('sensorText').textContent=`เลือก ${p.brand} ${p.model} · กด START ENGINE AUDIO`;} 
+}
+document.querySelectorAll('[data-region]').forEach(el=>el.addEventListener('click',()=>{
+ region=el.dataset.region;brand='All';document.querySelectorAll('[data-region]').forEach(b=>b.classList.toggle('active',b===el));renderLibrary();
+}));
+byId('searchEngines').addEventListener('input',renderLibrary);
+
+function gauge(speed){
+ const c=byId('gauge'),ctx=c.getContext('2d'),width=520,height=296;
+ const ratio=window.devicePixelRatio||1;
+ if(c.width!==Math.round(width*ratio)||c.height!==Math.round(height*ratio)){c.width=width*ratio;c.height=height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);}
+ else {ctx.setTransform(ratio,0,0,ratio,0,0);} ctx.clearRect(0,0,width,height);
+ const centerX=260,centerY=239,r=173,start=Math.PI*.91,end=Math.PI*2.09;
+ function arc(s,e,color,lineW){ctx.beginPath();ctx.arc(centerX,centerY,r,s,e);ctx.strokeStyle=color;ctx.lineWidth=lineW;ctx.lineCap='round';ctx.stroke();}
+ arc(start,end,'#2a394b',18);
+ const pct=clamp(speed/240,0,1);if(pct>.002){const grad=ctx.createLinearGradient(60,0,440,100);grad.addColorStop(0,'#79b75a');grad.addColorStop(1,'#c9ff72');arc(start,start+(end-start)*pct,grad,18);}
+ for(let i=0;i<=24;i++){
+  const a=start+(end-start)*i/24,major=i%4===0,ir=major?142:151,outer=161;
+  ctx.beginPath();ctx.moveTo(centerX+Math.cos(a)*ir,centerY+Math.sin(a)*ir);ctx.lineTo(centerX+Math.cos(a)*outer,centerY+Math.sin(a)*outer);
+  ctx.strokeStyle=major?'#b5c2d0':'#65778a';ctx.lineWidth=major?2.2:1;ctx.stroke();
+  if(major){ctx.fillStyle='#78899c';ctx.font='600 13px ui-sans-serif,system-ui';ctx.textAlign='center';ctx.fillText(String(i*10),centerX+Math.cos(a)*121,centerY+Math.sin(a)*121+5);}
+ }
+ const needleAngle=start+(end-start)*pct;
+ ctx.beginPath();ctx.moveTo(centerX+Math.cos(needleAngle)*170,centerY+Math.sin(needleAngle)*170);ctx.lineTo(centerX+Math.cos(needleAngle)*188,centerY+Math.sin(needleAngle)*188);ctx.lineWidth=3;ctx.strokeStyle='#e3ffb4';ctx.stroke();
+}
+function haversine(a,b){
+ const toRad=Math.PI/180,R=6371000,dlat=(b.lat-a.lat)*toRad,dlon=(b.lon-a.lon)*toRad;
+ const x=Math.sin(dlat/2)**2+Math.cos(a.lat*toRad)*Math.cos(b.lat*toRad)*Math.sin(dlon/2)**2;
+ return 2*R*Math.asin(Math.min(1,Math.sqrt(x)));
+}
+function startSensors(){
+ if(!window.isSecureContext){byId('gpsNote').textContent='ต้องเปิดผ่าน HTTPS หรือ localhost เพื่อขอสิทธิ์ GPS และ Motion';return;}
+ if(!navigator.geolocation){byId('gpsNote').textContent='เบราว์เซอร์นี้ไม่รองรับ Geolocation';return;}
+ if(gpsWatch !== null)navigator.geolocation.clearWatch(gpsWatch);
+ byId('sensorText').textContent='กำลังขอสิทธิ์และหาตำแหน่ง GPS...';
+ gpsWatch=navigator.geolocation.watchPosition(pos=>{
+  const {latitude,longitude,accuracy,speed}=pos.coords;
+  const time=pos.timestamp,fix={lat:latitude,lon:longitude,time,accuracy};let kmh=null;
+  if(typeof speed==='number'&&Number.isFinite(speed)&&speed>=0)kmh=speed*3.6;
+  else if(lastFix&&accuracy<=45&&lastFix.accuracy<=45){
+    const delta=(time-lastFix.time)/1000;if(delta>=.5&&delta<=15){
+      const meters=haversine(lastFix,fix);
+      if(meters>=Math.max(accuracy,lastFix.accuracy)*.45) kmh=(meters/delta)*3.6;
+    }
+  }
+  lastFix=fix;
+  if(kmh!==null&&kmh>=0&&kmh<=350){
+    if(gpsRaw!==null){const dt=clamp((time-(gpsRaw.time||time))/1000,.5,15);if(Math.abs(kmh-gpsRaw.kmh)>Math.max(35,dt*50))return;}
+    gpsRaw={kmh,time};speedTarget=kmh;
+  }
+  gpsAgeMs=Date.now()-time;
+  byId('gpsAccuracy').textContent=accuracy<1000?`±${Math.round(accuracy)} m`:'LOW';
+  byId('gpsBar').style.width=`${clamp(100-accuracy,0,100)}%`;
+  byId('gpsNote').textContent='ได้รับ GPS แล้ว • ความละเอียดและความถี่ขึ้นอยู่กับมือถือและระบบปฏิบัติการ';
+  byId('sensorText').textContent=kmh===null?'GPS พร้อมใช้งาน • กำลังรอข้อมูลความเร็ว':'GPS LIVE • อ่านความเร็วล่าสุดแล้ว';
+ },err=>{byId('sensorText').textContent='GPS error: '+err.message;byId('gpsNote').textContent='ลองเปิด Location Services และตรวจสอบสิทธิ์เว็บไซต์ในเบราว์เซอร์';},
+ {enableHighAccuracy:true,maximumAge:0,timeout:12000});
+ if(typeof DeviceMotionEvent!=='undefined'){
+   const begin=()=>window.addEventListener('devicemotion',handleMotion,{passive:true});
+   if(typeof DeviceMotionEvent.requestPermission==='function'){
+     try { DeviceMotionEvent.requestPermission().then(status=>{if(status==='granted')begin();else byId('gpsNote').textContent='อนุญาต GPS แล้ว แต่ Motion ถูกปฏิเสธ ระบบยังใช้ GPS ได้';}).catch(()=>{}); } catch { /* Some browsers do not expose motion permission. GPS still works. */ }
+   }else begin();
+ }
+ byId('gpsButton').textContent='GPS CONNECTING / ACTIVE';
+}
+function handleMotion(e){
+ const a=e.acceleration;
+ if(!a)return;
+ // Magnitude is only a transient load cue. It is NOT a trustworthy longitudinal acceleration or speed sensor.
+ const m=Math.hypot(a.x||0,a.y||0,a.z||0);
+ motionAmount=clamp(m,0,8);
+}
+byId('gpsButton').addEventListener('click',startSensors);
+byId('speedSlider').addEventListener('input',e=>{demoSpeed=Number(e.target.value);manualDemo=false;gasHeld=false;brakeHeld=false;byId('demoSpeedLabel').textContent=fmt(demoSpeed)});
+
+// ===== Original licensed field recordings (HTMLAudioElement; NO synthesizer) =====
+// HTML media playback avoids requiring CORS permission for audio samples.
+// NOTE: a source recording is NOT a multi-RPM interactive sound bank.
+// WebAudio engine: real sampled loops per RPM and load, with optional original shift recordings.
+// No oscillators, artificial exhaust notes, or mislabeled fake car samples.
+class BankPlayback {
+ constructor(){this.context=null;this.sources=new Map();this.effects=new Map();this.master=null;this.profile=profile;this.drive=soundDriveMode;}
+ async start(){
+  const files=getBank();const loopNames=['idle','low','mid','high','decel'];
+  if(!loopNames.some(k=>files.has(k)))throw new Error('ไม่มี RPM Loop กรุณาเลือกอย่างน้อย 1 ไฟล์');
+  const Ctx=window.AudioContext||window.webkitAudioContext;
+  if(!Ctx)throw new Error('Web Audio API unavailable');
+  this.context=new Ctx();await this.context.resume();this.master=this.context.createGain();this.master.gain.value=0;
+  this.master.connect(this.context.destination);
+  try{
+   for(const [role,file] of files){
+    const data=await file.arrayBuffer();const buffer=await this.context.decodeAudioData(data);
+    if(role==='up'||role==='down'){this.effects.set(role,buffer);continue;}
+    if(buffer.duration<.09)throw new Error('ไฟล์ '+role+' สั้นเกินไป');
+    const src=this.context.createBufferSource();src.buffer=buffer;src.loop=true;
+    // Clip selected should be a seamless loop extracted from a real constant-RPM recording.
+    const gain=this.context.createGain();gain.gain.value=0;
+    src.connect(gain).connect(this.master);src.start();
+    const anchor=role==='idle'?profile.idle:Math.min(RPM_ANCHORS[role],profile.redline*.93);
+    this.sources.set(role,{src,gain,anchor});
+   }
+  }catch(e){this.stop();throw e;}
+  this.profile=profile;this.drive=soundDriveMode;
+ }
+ stop(){for(const o of this.sources.values()){try{o.src.stop()}catch{}}this.sources.clear();this.effects.clear();if(this.context){try{this.context.close()}catch{}}this.context=null;}
+ applyProfile(){this.stop();}
+ setTuning(_x,drive){this.drive=drive;}
+ gearShift(kind){
+  if(!this.context||!this.effects.has(kind))return;
+  const buffer=this.effects.get(kind),ctx=this.context,src=ctx.createBufferSource(),gain=ctx.createGain();
+  src.buffer=buffer;src.connect(gain).connect(this.master);gain.gain.value=.8;
+  src.start();src.onended=()=>{src.disconnect();gain.disconnect();};
+ }
+ update(p,rpmNow,load,motion,volume,enabled,cut=1){
+  if(!enabled||!this.context)return;
+  const ctx=this.context,now=ctx.currentTime,s=DRIVE_TUNING[this.drive]||DRIVE_TUNING.normal;
+  const active=[...this.sources.entries()].filter(([key])=>key!=='decel').sort((a,b)=>a[1].anchor-b[1].anchor);
+  let weights=new Map();
+  if(active.length===1)weights.set(active[0][0],1);
+  else if(active.length>1){
+   if(rpmNow<=active[0][1].anchor)weights.set(active[0][0],1);
+   else if(rpmNow>=active.at(-1)[1].anchor)weights.set(active.at(-1)[0],1);
+   else for(let i=0;i<active.length-1;i++){
+    const [ka,oa]=active[i],[kb,ob]=active[i+1];
+    if(rpmNow>=oa.anchor&&rpmNow<=ob.anchor){const t=clamp((rpmNow-oa.anchor)/(ob.anchor-oa.anchor),0,1);weights.set(ka,Math.cos(t*Math.PI/2));weights.set(kb,Math.sin(t*Math.PI/2));break;}
+   }
+  }
+  const offLoad=clamp((.28-load)*3.5,0,1);
+  const hasDecel=this.sources.has('decel');
+  this.master.gain.setTargetAtTime(clamp(volume*s.level*cut,0,1),now,.06);
+  for(const [key,layer] of this.sources){
+   const factor=clamp((key==='decel'?rpmNow/Math.max(1,layer.anchor):rpmNow/Math.max(1,layer.anchor)),.58,1.80);
+   layer.src.playbackRate.setTargetAtTime(factor,now,.07);
+   const mix=key==='decel'?offLoad:(weights.get(key)||0)*(hasDecel?(1-offLoad*.90):1);
+   layer.gain.gain.setTargetAtTime(clamp(mix,0,1),now,.06);
+  }
+ }
+}
+
+class RealRecordingEngine {
+ constructor(){
+  this.media=new Audio();this.media.preload='auto';this.media.loop=true;this.media.playsInline=true;
+  this.p=profile;this.drive=soundDriveMode;this.activeSource='';this.bank=null;this.usingBank=false;
+ }
+ applyProfile(p){this.stop();this.p=p;this.activeSource='';if(isAudioPlaying){isAudioPlaying=false;paintPlayback();byId('sensorText').textContent='เปลี่ยนรถแล้ว · กด START เพื่อโหลดเสียงรุ่นนี้';}}
+ setTuning(_x,drive){this.drive=drive;if(this.bank)this.bank.setTuning(null,drive);}
+ gearShift(kind){if(this.bank&&this.usingBank)this.bank.gearShift(kind);}
+ getSources(){const p=this.p;return [
+  ...(localObjects.has(p.id)?[{name:'IMPORTED REAL FILE',url:localObjects.get(p.id)}]:[]),
+  // First use same-origin audio when the website is hosted via the REVSHIFT server.
+  // The server fetches the file itself; visitors to the car screen never upload anything.
+  ...(location.protocol==='file:'?[]:[...(p.ext!=='wav'?[{name:'WEB MP3 CACHE',url:`./sounds/${p.id}.mp3`}]:[]),{name:'WEB ORIGINAL CACHE',url:`./sounds/${p.id}.${p.ext}`}]),
+  ...(p.ext!=='wav'?[{name:'WIKIMEDIA MP3 (SAFARI)',url:mp3AudioUrl(p)}]:[]),
+  {name:'ORIGINAL RECORDING',url:audioUrl(p)},
+  {name:'COMMONS REDIRECT',url:fallbackAudioUrl(p)}
+ ];}
+ async start(){
+  const bank=getBank();
+  if(['idle','low','mid','high','decel'].some(k=>bank.has(k))){
+   this.bank=new BankPlayback();await this.bank.start();this.usingBank=true;this.activeSource='MULTI-SAMPLE BANK';
+   byId('downloadStatus').textContent='ใช้ไฟล์เสียงจริงจาก Multi-Sample Bank · ปรับรอบและเกียร์แบบต่อเนื่อง';
+   return;
+  }
+  this.usingBank=false;this.media.volume=.20;this.media.playbackRate=1;
+  setHudAudioState('loading','กำลังเชื่อมเสียงรถจริง…');
+  const errors=[];
+  for(const source of this.getSources()){
+   this.media.pause();this.media.removeAttribute('src');this.media.load();this.media.src=source.url;
+   byId('downloadStatus').textContent='กำลังโหลด: '+source.name;
+   setHudAudioState('loading','กำลังโหลด '+source.name+'…');
+   try{
+    await Promise.race([this.media.play(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('โหลดเสียงช้าหรือไฟล์ไม่รองรับ')),source.name==='WEB AUDIO CACHE'?12000:10000))]);
+    this.activeSource=source.name;
+    setHudAudioState('playing',`กำลังเล่นเสียงจริง: ${this.p.brand} ${this.p.model} · ${source.name}`);
+    byId('downloadStatus').textContent='SINGLE RECORDING PREVIEW • '+source.name+' · ไม่ใช่เสียงแบบแยก RPM';return;
+   }catch(err){errors.push(source.name+': '+(err?.name||'Error'));}
+  }
+  this.media.pause();this.media.removeAttribute('src');this.media.load();
+  throw new Error('ไม่มีแหล่งเสียงที่เล่นได้จากเว็บนี้ ('+errors.join(' / ')+')');
+ }
+ stop(){this.media.pause();try{this.media.currentTime=0}catch{}if(this.bank){this.bank.stop();this.bank=null;}this.usingBank=false;}
+ update(p,rpmNow,load,motion,volume,enabled,cut=1){
+  if(!enabled)return;
+  if(this.usingBank&&this.bank){this.bank.update(p,rpmNow,load,motion,volume,enabled,cut);return;}
+  if(!this.media.src)return;
+  const settings=DRIVE_TUNING[this.drive]||DRIVE_TUNING.normal;
+  const normalized=clamp((rpmNow-p.idle)/Math.max(1,p.redline-p.idle),0,1);
+  const target=clamp(.74+normalized*.90,.62,1.70);
+  this.media.playbackRate=lerp(this.media.playbackRate,target,.19*settings.attack);
+  this.media.volume=clamp(volume*settings.level*(.52+load*.48)*cut,0,1);
+ }
+}
+function updateSourceInfo(){
+ const link=byId('sourceLink');link.textContent=`SOURCE · ${profile.author} · ${profile.license} ↗`;
+ link.href=filePage(profile);link.target='_blank';link.rel='noopener noreferrer';
+ byId('sampleStatus').textContent='REAL RECORDINGS · IMPORT RPM LOOPS FOR ACCURACY';
+ byId('sourceCaption').textContent=`เสียงจริง ${profile.duration} · ${profile.license} · ไม่ยืนยันว่าท่อเดิม/ท่อแต่ง เว้นแต่มีระบุจากแหล่งข้อมูล`;
+ byId('downloadOriginal').href=profile.directUrl;
+ byId('viewLicense').href=profile.licenseUrl;
+ byId('localAudioFile').value='';
+ byId('downloadStatus').textContent=localObjects.has(profile.id)?'มีไฟล์ที่เลือกไว้สำหรับรุ่นนี้แล้ว':'ยังไม่ได้เลือกไฟล์ในเครื่อง · จะลองโฟลเดอร์ sounds/ และ URL ออนไลน์';
+}
+function paintPlayback(){
+ byId('audioBtn').classList.toggle('playing',isAudioPlaying);
+ byId('audioIcon').textContent=isAudioPlaying?'■':'▶';
+ byId('audioBtnText').textContent=isAudioPlaying?'STOP REAL SOUND':'START ENGINE AUDIO';
+ byId('topStatus').textContent=isAudioPlaying?'REAL AUDIO PLAYING':'READY TO CONNECT';
+ byId('statusLed').classList.toggle('on',isAudioPlaying);
+}
+document.querySelectorAll('[data-sound-mode]').forEach(el=>el.addEventListener('click',()=>{
+ soundDriveMode=el.dataset.soundMode;
+ document.querySelectorAll('[data-sound-mode]').forEach(x=>x.classList.toggle('active',x===el));
+ if(sound)sound.setTuning(null,soundDriveMode);
+ byId('modeSummary').textContent=({comfort:'เปลี่ยนเกียร์เร็วขึ้น / เสียงนุ่ม',normal:'เปลี่ยนเกียร์สมดุล / เสียงกลาง',sport:'ลากรอบสูงขึ้น / ตอบสนองไว'})[soundDriveMode];
+}));
+const vehiclePicker=byId('vehicleSelect');
+vehiclePicker.addEventListener('change',()=>{
+ vehicle=vehiclePicker.value;
+ byId('sensorText').textContent=`Selected ${vehicle==='g6'?'XPENG G6':vehicle==='x9'?'XPENG X9':'other EV'} · ไม่เชื่อม ECU`;
+});
+async function engineToggle(){
+ if(mode==='phone'&&phoneRoom){byId('sensorText').textContent='เมื่อ Sync แล้ว ให้เริ่มเสียงบนจอรถ เพื่อป้องกันเสียงซ้อน';return;}
+ try {
+  if(!sound)sound=new RealRecordingEngine();
+  if(isAudioPlaying){sound.stop();isAudioPlaying=false;setHudAudioState('idle','หยุดเสียงแล้ว · เลือกรถและกด START SOUND');}
+  else {await sound.start();isAudioPlaying=true;}
+  paintPlayback();
+ }catch(err){isAudioPlaying=false;paintPlayback();setHudAudioState('error','ยังเล่นเสียงไม่ได้: '+err.message);byId('sensorText').textContent='ไม่สามารถเล่นไฟล์เสียงได้: '+err.message;}
+}
+byId('audioBtn').addEventListener('click',engineToggle);
+byId('localAudioFile').addEventListener('change',async e=>{
+ const f=e.target.files?.[0];if(!f)return;
+ if(!(/\.(ogg|oga|mp3|wav|m4a|aac|flac)$/i.test(f.name)||f.type.startsWith('audio/'))){byId('downloadStatus').textContent='กรุณาเลือกไฟล์เสียง .ogg, .mp3 หรือ .wav';return;}
+ if(isAudioPlaying){sound.stop();isAudioPlaying=false;paintPlayback();}
+ if(localObjects.has(profile.id)){const prev=localObjects.get(profile.id);URL.revokeObjectURL(prev);}
+ const object=URL.createObjectURL(f);localObjects.set(profile.id,object);
+ if(!sound)sound=new RealRecordingEngine();
+ sound.applyProfile(profile);
+ byId('downloadStatus').textContent=`ไฟล์: ${f.name} (${(f.size/1048576).toFixed(1)} MB) · กด PLAY`;
+ byId('sensorText').textContent=`ใช้ไฟล์จากเครื่องแล้ว: ${f.name} · กด PLAY`;
+});
+const rev=byId('revBtn');
+function revOn(e){if(e)e.preventDefault();isRevving=true;rev.textContent='BLIPPING RPM';try{rev.setPointerCapture(e.pointerId)}catch{}}
+function revOff(){isRevving=false;rev.textContent='FREE REV / BLIP';}
+rev.addEventListener('pointerdown',revOn);rev.addEventListener('pointerup',revOff);rev.addEventListener('pointercancel',revOff);window.addEventListener('blur',revOff);
+document.querySelectorAll('[data-bank-role]').forEach(el=>el.addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ if(!file.type.startsWith('audio/')&&!/\.(wav|mp3|ogg|m4a|aac|flac)$/i.test(file.name)){byId('bankStatus').textContent='โปรดใช้ไฟล์เสียงจริง WAV / MP3 / OGG';return;}
+ // Do not label generic clips as stock/tuned or a specific RPM unless the original recording supports it.
+ getBank().set(el.dataset.bankRole,file);paintBank();
+ if(isAudioPlaying){sound.stop();isAudioPlaying=false;paintPlayback();byId('bankStatus').textContent+=' · กด START ใหม่เพื่อใช้ Sound Bank';}
+}));
+function bindPedal(id,flag){
+ const el=byId(id);const change=on=>{if(flag==='gas')gasHeld=on;else brakeHeld=on;el.classList.toggle('down',on);};
+ el.addEventListener('pointerdown',e=>{e.preventDefault();manualDemo=true;change(true);try{el.setPointerCapture(e.pointerId)}catch{}});
+ for(const ev of ['pointerup','pointercancel','lostpointercapture'])el.addEventListener(ev,()=>change(false));
+}
+bindPedal('gasPedal','gas');bindPedal('brakePedal','brake');
+window.addEventListener('keydown',e=>{if(mode!=='demo'||e.repeat||/INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key==='ArrowUp'){e.preventDefault();manualDemo=true;gasHeld=true;byId('gasPedal').classList.add('down');}if(e.key==='ArrowDown'){e.preventDefault();manualDemo=true;brakeHeld=true;byId('brakePedal').classList.add('down');}});
+window.addEventListener('keyup',e=>{if(e.key==='ArrowUp'){gasHeld=false;byId('gasPedal').classList.remove('down');}if(e.key==='ArrowDown'){brakeHeld=false;byId('brakePedal').classList.remove('down');}});
+window.addEventListener('blur',()=>{gasHeld=false;brakeHeld=false;byId('gasPedal').classList.remove('down');byId('brakePedal').classList.remove('down');});
+
+byId('volumeSlider').addEventListener('input',e=>byId('volumeLabel').textContent=e.target.value+'%');
+
+// ===== Cross-device pairing using the optional Node/WebSocket relay =====
+function connectSocket(id,role){
+ if(socket){socket.onclose=null;socket.close();socket=null;}
+ const endpoint=`${wsProtocol}//${location.host}/sync`;
+ try{socket=new WebSocket(endpoint);}catch(e){byId('sensorText').textContent='WebSocket unavailable: '+e.message;return;}
+ paired=false;
+ socket.onopen=()=>socket.send(JSON.stringify({type:'join',room:id,role}));
+ socket.onmessage=event=>{
+  let pkt;try{pkt=JSON.parse(event.data)}catch{return}
+  if(pkt.type==='joined'){
+    const t=role==='phone'?byId('phonePairStatus'):byId('pairStatus');
+    t.textContent='WAITING FOR PAIR';t.classList.remove('good');
+  }else if(pkt.type==='paired'){
+    paired=true;
+    const t=role==='phone'?byId('phonePairStatus'):byId('pairStatus');t.textContent='CONNECTED';t.classList.add('good');
+    if(role==='dashboard')byId('sensorText').textContent='Phone paired • awaiting motion / GPS data';
+    else byId('sensorText').textContent='เชื่อมกับจอรถแล้ว • กด ALLOW GPS + MOTION เพื่อเริ่มส่งข้อมูล';
+  }else if(pkt.type==='unpaired'){
+    paired=false;
+    const t=role==='phone'?byId('phonePairStatus'):byId('pairStatus');t.textContent='DISCONNECTED';t.classList.remove('good');
+  }else if(pkt.type==='telemetry'&&role==='dashboard'){
+    lastPacketTime=Date.now();
+    if(pkt.speedKmh !== null){speedTarget=pkt.speedKmh;}
+    motionSmoothed=lerp(motionSmoothed,pkt.accel||0,.35);
+    byId('gpsAccuracy').textContent=pkt.accuracy===null?'—':`±${Math.round(pkt.accuracy)} m`;
+    byId('gpsBar').style.width=`${clamp(100-(pkt.accuracy||100),0,100)}%`;
+    gpsAgeMs=pkt.ageMs||0;
+    byId('sensorText').textContent='SYNC LIVE • phone sensor telemetry';
+  }else if(pkt.type==='error'){
+    byId('sensorText').textContent='Pairing error: '+pkt.message;
+  }
+ };
+ socket.onclose=()=>{paired=false;const label=role==='phone'?byId('phonePairStatus'):byId('pairStatus');label.textContent='OFFLINE';label.classList.remove('good');};
+}
+async function createRoom(){
+ byId('pairCode').textContent='--------';byId('pairStatus').textContent='CONNECTING';
+ try{
+  const resp=await fetch('/api/room',{cache:'no-store'});if(!resp.ok)throw Error('Server unavailable');
+  const data=await resp.json();room=data.room;
+  byId('pairCode').textContent=room;
+  byId('qrImage').src=`/api/qr?room=${encodeURIComponent(room)}`;
+  connectSocket(room,'dashboard');
+ }catch(e){byId('pairStatus').textContent='SERVER REQUIRED';byId('sensorText').textContent='QR Sync ต้องรันผ่าน Node server (npm install && npm start)';}
+}
+byId('newRoom').addEventListener('click',createRoom);
+function setMode(next){
+ if(!['demo','phone','dashboard'].includes(next))return;
+ // Switching modes stops previous location tracking and resets the stale speed display.
+ if(gpsWatch!==null && navigator.geolocation){navigator.geolocation.clearWatch(gpsWatch);gpsWatch=null;}
+ window.removeEventListener('devicemotion',handleMotion);
+ gpsRaw=null;lastFix=null;gpsAgeMs=Infinity;motionAmount=0;motionSmoothed=0;
+ speedTarget=0;screenSpeed=0;currentGear=1;shiftUntil=0;shiftCutUntil=0;lastShiftTime=-100000;revMatchUntil=0;gasHeld=false;brakeHeld=false;manualDemo=false;
+ byId('gpsAccuracy').textContent='—';byId('gpsBar').style.width='0%';
+ byId('gpsButton').textContent='ALLOW GPS + MOTION';
+ mode=next;
+ document.querySelectorAll('.mode').forEach(el=>el.classList.toggle('active',el.dataset.mode===mode));
+ byId('demoControls').classList.toggle('hidden',mode!=='demo');
+ byId('gpsControls').classList.toggle('hidden',mode!=='phone' && mode!=='dashboard');
+ byId('pairControls').classList.toggle('hidden',mode!=='dashboard');
+ byId('phonePairControls').classList.toggle('hidden',mode!=='phone'||!phoneRoom);
+ byId('sourcePill').textContent=mode==='demo'?'DEMO INPUT':mode==='phone'?'PHONE SENSORS':'CAR DISPLAY';
+ if(mode==='demo'){
+  if(socket){socket.onclose=null;socket.close();socket=null;}paired=false;
+  byId('sensorText').textContent='Simulator ready — เลื่อนความเร็วเพื่อทดลอง';
+ }else if(mode==='dashboard'){
+  if(socket){socket.onclose=null;socket.close();socket=null;}paired=false;
+  byId('sensorText').textContent='Car display ready • สแกน QR ด้วยมือถือ';
+  createRoom();
+ }else if(phoneRoom){
+  connectSocket(phoneRoom,'phone');
+ }else{
+  if(socket){socket.onclose=null;socket.close();socket=null;}paired=false;
+  byId('sensorText').textContent='Phone only • เปิด GPS และต่อเสียง Bluetooth กับรถจาก Settings มือถือ';
+ }
+}
+document.querySelectorAll('[data-mode]').forEach(el=>el.addEventListener('click',()=>setMode(el.dataset.mode)));
+
+// Simulated drivetrain. Gears/RPM do not come from an XPENG vehicle ECU.
+const SHIFT_CFG={comfort:{up:.52,down:.23},normal:{up:.72,down:.27},sport:{up:.88,down:.32}};
+function gearRedlineSpeed(gear){return [47,77,111,153,204,265,310,350][clamp(gear-1,0,7)]||350;}
+function gearRpm(speed,gear){const ratio=clamp(speed/gearRedlineSpeed(gear),0,1.18);return profile.idle+ratio*(profile.redline-profile.idle);}
+function performShift(kind,newGear,time){
+ const from=currentGear;currentGear=newGear;lastShiftTime=time;
+ shiftUntil=time+(kind==='up'?320:340);shiftCutUntil=time+(kind==='up'?125:0);
+ if(kind==='down'){revMatchUntil=time+270;revMatchPulse=1;}else revMatchPulse=0;
+ lastEventKind=kind;byId('shiftEvent').textContent=(kind==='up'?'UPSHIFT':'DOWNSHIFT · REV MATCH')+'  '+from+' → '+newGear;
+ if(sound&&isAudioPlaying)sound.gearShift(kind);
+}
+function simulationStep(time,dt){
+ if(mode==='demo'){
+  if(manualDemo){
+   const gain=gasHeld?(soundDriveMode==='sport'?25:soundDriveMode==='comfort'?14:19):0;
+   const loss=brakeHeld?35:(1.3+demoSpeed*.018);
+   demoSpeed=clamp(demoSpeed+(gain*Math.sqrt(Math.max(.08,1-demoSpeed/270))-loss)*dt,0,240);
+   byId('speedSlider').value=Math.round(demoSpeed);byId('demoSpeedLabel').textContent=fmt(demoSpeed);
+  }
+  speedTarget=demoSpeed;
+ }
+ if(mode==='dashboard'&&paired&&Date.now()-lastPacketTime>3000)byId('sensorText').textContent='PAIR CONNECTED • ข้อมูลโทรศัพท์ไม่อัปเดต';
+ const smooth=1-Math.exp(-dt*(mode==='demo'?10:3.4));
+ const previous=screenSpeed;screenSpeed=lerp(screenSpeed,speedTarget,smooth);
+ if(screenSpeed<.13)screenSpeed=0;
+ speedDelta=lerp(speedDelta,dt>0?(screenSpeed-previous)/dt/3.6:0,clamp(dt*5,0,1));
+ const gpsThrottle=clamp(Math.max(0,speedDelta)*.27+motionSmoothed*.035,0,1);
+ if(mode==='demo'){
+  const manualTarget=gasHeld?1:0;
+  filteredGas=lerp(filteredGas,manualDemo?manualTarget:clamp(speedDelta*.20,0,1),clamp(dt*7,0,1));
+  throttle=filteredGas;
+ }else {throttle=lerp(throttle,gpsThrottle,clamp(dt*5,0,1));}
+ const cfg=SHIFT_CFG[soundDriveMode];
+ if(time-lastShiftTime>720&&time>shiftUntil){
+  const target=gearRpm(screenSpeed,currentGear),normalized=target/profile.redline;
+  if(currentGear<profile.gears&&normalized>=cfg.up&&screenSpeed>8&&(throttle>.10||normalized>.96)){
+   performShift('up',currentGear+1,time);
+  }else if(currentGear>1){
+   const lowerRPM=gearRpm(screenSpeed,currentGear-1);
+   const downRequest=(normalized<cfg.down && screenSpeed<gearRedlineSpeed(currentGear-1)*.66)||(throttle>.70 && normalized<.43);
+   if(downRequest&&lowerRPM<profile.redline*.90)performShift('down',currentGear-1,time);
+  }
+ }
+ const matched=gearRpm(screenSpeed,currentGear);
+ const blip=time<revMatchUntil?Math.sin(Math.PI*clamp(1-(revMatchUntil-time)/270,0,1))*Math.min(1100,profile.redline*.16):0;
+ const freeRev=isRevving?profile.idle+(profile.redline-profile.idle)*.80:0;
+ const targetRpm=isRevving?freeRev:clamp(matched+Math.max(0,throttle)*240+blip,profile.idle,profile.redline);
+ const attack=targetRpm>rpm?7.8:5.5;
+ rpm=lerp(rpm,targetRpm,1-Math.exp(-dt*attack));
+ const shiftCut=time<shiftCutUntil?.10:time<shiftUntil&&lastEventKind==='up'?.75:1;
+ if(sound)sound.update(profile,rpm,throttle,motionSmoothed,Number(byId('volumeSlider').value)/100,isAudioPlaying,shiftCut);
+ byId('speedNumber').textContent=fmt(screenSpeed);byId('rpmValue').textContent=fmt(rpm);
+ byId('gearValue').innerHTML=`${isRevving?'N':currentGear}<span class="muted-unit"> / ${profile.gears}</span>`;
+ byId('rpmBar').style.width=`${clamp(rpm/profile.redline*100,0,100)}%`;
+ byId('gearBar').style.width=`${currentGear/profile.gears*100}%`;
+ if(mode!=='demo'){
+  const age=lastFix?Math.round((Date.now()-lastFix.time)/1000):null;
+  byId('gpsAge').textContent=age===null?'GPS: NO FIX':`GPS: ${age}s ago`;
+  if(age!==null&&age>12&&mode==='phone'){byId('sensorText').textContent='GPS STALE • ไม่มีข้อมูลใหม่';speedTarget=0;}
+ }else byId('gpsAge').textContent='MANUAL SIMULATOR';
+ if(mode==='phone'&&phoneRoom&&paired&&socket&&socket.readyState===WebSocket.OPEN&&Date.now()-lastSendTime>100){
+  lastSendTime=Date.now();socket.send(JSON.stringify({type:'telemetry',speedKmh:gpsRaw?gpsRaw.kmh:null,accel:motionSmoothed,accuracy:lastFix?lastFix.accuracy:null,ageMs:lastFix?Date.now()-lastFix.time:null}));
+ }
+ gauge(screenSpeed);
+}
+function animationFrame(time){
+ const dt=Math.min((time-lastFrame)/1000,.1);lastFrame=time;
+ motionSmoothed=lerp(motionSmoothed,motionAmount,clamp(dt*2.2,0,1));
+ motionAmount*=Math.pow(.86,dt*60);
+ simulationStep(time,dt);
+ paintCockpit();
+ requestAnimationFrame(animationFrame);
+}
+
+
+// ===== v0.7 — XPENG COCKPIT: primary dashboard, reads the SAME simulation state as the audio engine. =====
+const hudVehicleNames={g6:'XPENG G6',x9:'XPENG X9',other:'OTHER EV'};
+const hudBrandSelect=byId('hudBrandSelect');
+const hudSelect=byId('hudProfileSelect');
+function syncHudChoices(){
+ const brands=[...new Set(PROFILES.map(p=>p.brand))];
+ hudBrandSelect.replaceChildren(...brands.map(b=>new Option(b,b)));
+ hudBrandSelect.value=profile.brand;
+ const selectedBrand=hudBrandSelect.value;
+ const models=PROFILES.filter(p=>p.brand===selectedBrand);
+ hudSelect.replaceChildren(...models.map(p=>new Option(p.model+' · '+p.type,p.id)));
+ hudSelect.value=profile.id;
+}
+hudBrandSelect.addEventListener('change',()=>{
+ const next=PROFILES.find(p=>p.brand===hudBrandSelect.value);
+ if(next)setProfile(next);
+});
+hudSelect.addEventListener('change',()=>{
+ const p=PROFILES.find(x=>x.id===hudSelect.value);
+ if(p)setProfile(p);
+});
+function setHudAudioState(kind,message){
+ const el=byId('hudAudioStatus');if(!el)return;
+ el.dataset.state=kind;el.textContent=message;
+}
+syncHudChoices();
+const prevSetProfile=setProfile; // existing profile updates are mirrored by paintCockpit
+const hudSpeedSlider=byId('hudSpeedSlider');
+hudSpeedSlider.addEventListener('input',()=>{demoSpeed=Number(hudSpeedSlider.value);manualDemo=false;gasHeld=false;brakeHeld=false;byId('speedSlider').value=hudSpeedSlider.value;byId('demoSpeedLabel').textContent=fmt(demoSpeed);});
+bindPedal('hudGas','gas');bindPedal('hudBrake','brake');
+for(const b of document.querySelectorAll('[data-hud-drive]')){
+ b.addEventListener('click',()=>{const match=document.querySelector(`[data-sound-mode="${b.dataset.hudDrive}"]`);if(match)match.click();});
+}
+for(const b of document.querySelectorAll('[data-hud-input]')){
+ b.addEventListener('click',()=>{setMode(b.dataset.hudInput);if(b.dataset.hudInput==='dashboard'){document.body.classList.add('settings-open');byId('settingsHead').hidden=false;byId('settingsPanel').scrollIntoView({behavior:'smooth',block:'start'});}else if(b.dataset.hudInput==='phone'){document.body.classList.add('settings-open');byId('settingsHead').hidden=false;byId('gpsButton').scrollIntoView({behavior:'smooth',block:'center'});}});
+}
+byId('hudAudioBtn').addEventListener('click',()=>byId('audioBtn').click());
+byId('hudOptions').addEventListener('click',()=>{const opened=document.body.classList.toggle('settings-open');byId('settingsHead').hidden=!opened;byId('hudOptions').setAttribute('aria-expanded',String(opened));if(opened)byId('settingsHead').scrollIntoView({behavior:'smooth',block:'start'});});
+byId('hudFullscreen').addEventListener('click',async()=>{
+ if(document.fullscreenElement){try{await document.exitFullscreen()}catch{};document.body.classList.remove('cockpit-only');return;}
+ document.body.classList.add('cockpit-only');try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();}catch{/* Some car browsers disallow fullscreen; keep focus layout. */}
+});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)document.body.classList.remove('cockpit-only')});
+// Circular speed / rpm gauges, tied to the same live state used by engine sound + shift logic.
+function paintDial(canvas,value,max,kind,limit){
+ const w=460,h=460,dpr=Math.min(window.devicePixelRatio||1,2);if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=w*dpr;canvas.height=h*dpr;}const c=canvas.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+ const cx=230,cy=226,r=174,start=.75*Math.PI,end=2.25*Math.PI,span=end-start;
+ function arc(a,b,color,size){c.beginPath();c.arc(cx,cy,r,a,b);c.strokeStyle=color;c.lineWidth=size;c.lineCap='round';c.stroke()}
+ c.save();c.shadowBlur=14;c.shadowColor='#3c9f8540';arc(start,end,'#18353a',17);c.restore();
+ if(kind==='rpm'){arc(start+span*.83,end,'#873c3f',17);}
+ let frac=clamp(value/Math.max(1,max),0,1);if(frac>.001){const grad=c.createLinearGradient(50,65,410,390);grad.addColorStop(0,'#1cbab0');grad.addColorStop(.52,'#78df91');grad.addColorStop(1,kind==='rpm'&&frac>.83?'#fb8678':'#ceff77');arc(start,start+span*frac,grad,17)}
+ for(let i=0;i<=24;i++){
+   const a=start+span*i/24,major=i%4===0;let inner=major?135:145,outer=157;
+   c.beginPath();c.moveTo(cx+Math.cos(a)*inner,cy+Math.sin(a)*inner);c.lineTo(cx+Math.cos(a)*outer,cy+Math.sin(a)*outer);c.lineWidth=major?3.2:1.4;c.strokeStyle=kind==='rpm'&&i>19?'#fe867d':major?'#b3d2cb':'#587076';c.stroke();
+   if(major){let label=(max*i/24);const text=kind==='rpm'?Math.round(label/1000).toString():Math.round(label).toString();c.fillStyle='#99b3b6';c.font='800 14px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillText(text,cx+Math.cos(a)*111,cy+Math.sin(a)*111);}
+ }
+ const a=start+span*frac;
+ c.save();c.translate(cx,cy);c.rotate(a);c.shadowColor='#c2ff7c';c.shadowBlur=14;c.beginPath();c.moveTo(-22,3);c.lineTo(146,0);c.lineTo(-22,-3);c.closePath();c.fillStyle='#e1ffb1';c.fill();c.restore();
+ c.beginPath();c.arc(cx,cy,10,0,Math.PI*2);c.fillStyle='#d2ff91';c.fill();c.beginPath();c.arc(cx,cy,5,0,Math.PI*2);c.fillStyle='#0b1920';c.fill();
+ c.beginPath();c.arc(cx,cy,95,0,Math.PI*2);c.strokeStyle='#b6fc600b';c.lineWidth=1;c.stroke();
+}
+function paintCockpit(){
+ const speed=screenSpeed,rpmNow=rpm;
+ byId('hudSpeed').textContent=fmt(speed);
+ byId('hudRpm').textContent=(rpmNow/1000).toFixed(1);
+ byId('hudGear').textContent=isRevving?'N':currentGear;
+ byId('hudGearTotal').textContent=`/ ${profile.gears}`;
+ byId('hudShift').textContent=byId('shiftEvent').textContent;
+ byId('hudLoad').style.width=`${Math.round(clamp(throttle,0,1)*100)}%`;
+ byId('hudLoadText').textContent=`${Math.round(clamp(throttle,0,1)*100)}%`;
+ byId('hudRpmLimit').textContent=`REDLINE ${fmt(profile.redline)} RPM`;
+ if(hudBrandSelect.value!==profile.brand||hudSelect.value!==profile.id)syncHudChoices();
+ byId('hudVehicle').textContent=hudVehicleNames[vehicle]||'OTHER EV';
+ byId('hudSource').textContent=mode==='demo'?'SIMULATOR':mode==='phone'?'PHONE GPS':paired?'PHONE SYNC LIVE':'PHONE SYNC WAITING';
+ const age=lastFix?Math.round((Date.now()-lastFix.time)/1000):null;
+ byId('hudGps').textContent=mode==='demo'?'NO REAL GPS':age===null?'WAITING FOR GPS':`GPS ${age}s AGO`;
+ byId('hudInfo').textContent=mode==='demo'?'DEMO · RPM / GEAR / THROTTLE SIMULATED':mode==='dashboard'?'SPEED FROM PAIRED IPHONE · THROTTLE ESTIMATED': 'GPS SPEED · THROTTLE ESTIMATED';
+ byId('hudDemoControls').hidden=mode!=='demo';
+ if(!manualDemo)byId('hudSpeedSlider').value=Math.round(demoSpeed);
+ byId('hudSpeedSliderLabel').textContent=`${fmt(demoSpeed)} km/h`;
+ byId('hudAudioBtn').textContent=isAudioPlaying?'■ STOP SOUND':'▶ START SOUND';
+ byId('hudAudioBtn').classList.toggle('playing',isAudioPlaying);
+ for(const b of document.querySelectorAll('[data-hud-drive]'))b.classList.toggle('active',b.dataset.hudDrive===soundDriveMode);
+ for(const b of document.querySelectorAll('[data-hud-input]'))b.classList.toggle('active',b.dataset.hudInput===mode);
+ paintDial(byId('hudSpeedDial'),speed,240,'speed');paintDial(byId('hudRpmDial'),rpmNow,profile.redline,'rpm');
+}
+// Only paint cockpit at screen cadence, separate from audio DSP updates.
+
+renderLibrary();setProfile(profile);
+if(phoneRoom){setMode('phone');}else{setMode('demo');}
+setHudAudioState('idle','เลือกแบรนด์และรุ่นรถ แล้วกด START SOUND · ต้องมีอินเทอร์เน็ต');
+requestAnimationFrame(animationFrame);
+
+
+</script>
+</body>
+</html>

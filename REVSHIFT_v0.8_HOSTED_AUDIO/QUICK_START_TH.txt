@@ -1,0 +1,14 @@
+REV//SHIFT v0.8 | แก้ ERROR เล่นเสียงไม่ออก
+
+สำคัญ: นี่เป็นแพ็กซอร์สสำหรับ Deploy เว็บที่มี MP3 อยู่ในตัวเว็บ
+ไม่ได้มีไฟล์ MP3 ใน ZIP ณ ตอนดาวน์โหลด (ต้องให้ GitHub Actions ดึงไฟล์ฟรีอัตโนมัติก่อน)
+
+เริ่มต้น:
+1) สร้าง GitHub repository ใหม่
+2) อัปโหลดทุกไฟล์จาก ZIP รวมโฟลเดอร์ .github และ scripts
+3) Settings > Pages > Source = GitHub Actions
+4) เปิดแท็บ Actions และรัน workflow Build real engine sound website
+5) เมื่อเสร็จจึงเปิด URL github.io บนจอ XPENG
+
+หน้าเว็บจะมีเฉพาะรุ่นที่ build เสียง MP3 ของจริงสำเร็จเท่านั้น
+ดู README.md สำหรับข้อจำกัดของ PHONE SYNC และการใช้งานบนรถ
